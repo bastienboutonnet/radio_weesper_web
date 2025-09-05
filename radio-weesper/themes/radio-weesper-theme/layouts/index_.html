@@ -1,0 +1,122 @@
+{{ define "title" }}{{ .Site.Title }}{{ end }} {{ define "main" }}
+<main class="homepage">
+  <script src="/js/live-marquee.js"></script>
+  <!-- Live banner -->
+  <section class="live-banner">
+    <div class="container">
+      <div class="live-banner-pill-inverted">
+        <div class="flex-center">
+          <span class="live-now-label">LIVE NOW</span>
+          <span class="circle-indicator"></span>
+          <div class="live-banner-marquee">
+            {{ with index (first 1 (where .Site.RegularPages "Section" "post"))
+            0 }}
+            <span class="marquee-span" id="live-marquee-title">
+              {{ .Title }}
+            </span>
+            {{ else }}
+            <span class="marquee-span-static">
+              No show yet. Add a post in <code>content/post/</code>.
+            </span>
+            {{ end }}
+          </div>
+        </div>
+        {{ with .Params.tags }}
+        <div class="post-tags">
+          {{ range . }}<span class="post-tag">{{ . }}</span>{{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Player + Now Playing -->
+  <section class="player-section container">
+    <div class="player">
+      <p class="media-message">VIDEO PLAYER</p>
+    </div>
+
+    {{ with index (first 1 (where .Site.RegularPages "Section" "post")) 0 }}
+    <aside class="now-playing">
+      <!-- <h2 class="now-playing-heading">Now Playing</h2> -->
+      <!-- {{ with .Params.image }}
+      <img
+        class="now-playing-image"
+        src="{{ . | relURL }}"
+        alt="{{ $.Title }}"
+      />
+      {{ end }} -->
+      <div
+        class="now-playing-info"
+        style="
+          flex: 1 1 auto;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+        "
+      >
+        <h3 class="show-title">{{ .Title }}</h3>
+        {{ if and .Params.showtime .Params.showendtime }}
+        <p class="show-time">
+          {{ .Params.showtime }} - {{ .Params.showendtime }}
+        </p>
+        {{ else if .Params.showtime }}
+        <p class="show-time">{{ .Params.showtime }}</p>
+        {{ else if .Params.showendtime }}
+        <p class="show-time">{{ .Params.showendtime }}</p>
+        {{ end }} {{ if .Params.description }}
+        <p class="show-description">{{ .Params.description }}</p>
+        {{ else }}
+        <p class="show-description">{{ .Summary }}</p>
+        {{ end }}
+        <div class="post-tags" style="margin-top: auto">
+          {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
+            >{{ . }}</span
+          >{{ end }} {{ end }}
+        </div>
+      </div>
+    </aside>
+    {{ else }}
+    <aside class="now-playing">
+      <h2 class="now-playing-heading">Now Playing</h2>
+      <p class="show-description">
+        No show yet. Add a post in <code>content/post/</code>.
+      </p>
+    </aside>
+    {{ end }}
+  </section>
+
+  <!-- Recent shows -->
+  <section class="recent-section container">
+    <h2 class="recent-heading page-title">Latest Shows</h2>
+    <div class="recent-posts">
+      {{ range first 6 (where .Site.RegularPages "Section" "post") }}
+      <article class="recent-post">
+        {{ with .Params.image }}
+        <img
+          class="recent-post-img"
+          src="{{ . | relURL }}"
+          alt="{{ $.Title }}"
+        />
+        {{ end }}
+        <div class="recent-post-content">
+          <h3 class="recent-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <p class="recent-date">
+            {{ .Date.Format "02 Jan 2006" }}{{ with .Params.showtime }}
+            <span class="recent-time">| {{ . }}</span>{{ end }}
+          </p>
+          <div class="post-tags">
+            {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
+              >{{ . }}</span
+            >{{ end }} {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+</main>
+{{ end }}
