@@ -1,0 +1,23 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }} {{ define "main"
+}}
+<main class="list-page container">
+  <h1>{{ .Title }}</h1>
+
+  <div class="list-posts">
+    {{ range .Pages }}
+    <article class="list-post">
+      <h2 class="list-post-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </h2>
+      {{ with .Params.showtime }}
+      <p class="list-post-time">{{ . }}</p>
+      {{ end }} {{ if .Params.description }}
+      <p class="list-post-summary">{{ .Params.description }}</p>
+      {{ else }}
+      <p class="list-post-summary">{{ .Summary }}</p>
+      {{ end }}
+    </article>
+    {{ end }}
+  </div>
+</main>
+{{ end }}

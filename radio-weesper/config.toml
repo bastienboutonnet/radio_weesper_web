@@ -1,0 +1,17 @@
+
+baseURL = "/"
+title = "Radio Weesper"
+theme = "radio-weesper-theme"
+# Configure default layout to handle posts
+[params]
+# Additional custom parameters can be added here
+[menu]
+	[[menu.main]]
+		name = "Home"
+		url = "/"
+		weight = 1
+
+	[[menu.main]]
+		name = "Archive"
+		url = "/archive/"
+		weight = 2
