@@ -1,7 +1,5 @@
-
 name: github pages
-
-
+on:
   push:
     branches:
       - teaser-page # Set a branch to deploy
