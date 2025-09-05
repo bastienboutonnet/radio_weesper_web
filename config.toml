@@ -1,5 +1,5 @@
 
-baseURL = "/"
+baseURL = "https://bastienboutonnet.github.io/radio_weesper_web/"
 title = "Radio Weesper"
 theme = "radio-weesper-theme"
 # Configure default layout to handle posts
