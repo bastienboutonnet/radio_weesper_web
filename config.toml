@@ -1,5 +1,5 @@
 
-baseURL = "https://bastienboutonnet.github.io/radio_weesper_web/"
+baseURL = "https://www.radioweesper.com"
 title = "Radio Weesper"
 theme = "radio-weesper-theme"
 [params]
