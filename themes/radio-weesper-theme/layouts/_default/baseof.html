@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <link rel="icon" type="image/png" href="{{ "favicon.png" | absURL }}" />
+    <link rel="icon" type="image/png" href="{{ "favicon.png" | absURL }}" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
@@ -11,18 +11,6 @@
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   </head>
   <body>
-    <div class="starfield" aria-hidden="true">
-      <!-- 70 stars, but only first 16 visible on mobile -->
-      {{ $starCount := 70 }}
-      {{ $duration := 4.0 }}
-      {{ $seq := shuffle (seq 1 $starCount) }}
-      {{ range $i, $v := $seq }}
-        {{ $top := mod (add (mul (pow $v 2) 17) (mul $i 31)) 100 }}
-        {{ $left := mod (add (mul (pow $i 2) 23) (mul $v 47)) 100 }}
-        {{ $delay := (mul $i (div $duration $starCount)) }}
-        <div class="star{{ if gt $i 15 }} hide-mobile{{ end }}" style="top:{{ $top }}%;left:{{ $left }}%;animation-delay:{{ printf "%.2fs" $delay }};"></div>
-      {{ end }}
-    </div>
     {{ if not .IsHome }} {{ partial "header.html" . }} {{ end }} {{ block "main"
     . }}{{ end }} {{ if not .IsHome }}
     <footer class="site-footer">
