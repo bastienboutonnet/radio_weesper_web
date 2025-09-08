@@ -1,7 +1,13 @@
-
 /* Base styling * THIS MUST BE KEPT AT THE TOP FOR IMPORTS TO WORK */
 @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;500&display=swap');
+/* Blue glow for header logo */
+.site-header .logo img {
+  border-radius: 20%;
+  filter: drop-shadow(0 0 8px rgba(164, 194, 224, 0.7)) drop-shadow(0 0 10px rgba(164, 194, 224, 0.5));
+}
+
+
 
 /* Make header social icons smaller */
 .site-header .social-icons svg {
@@ -73,14 +79,19 @@
   width: 100%;
   box-sizing: border-box;
   margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
 }
+
 
 .recent-post img {
   width: 100%;
   aspect-ratio: 16/9;
   object-fit: cover;
-  border-radius: 8px;
-  /* box-shadow: 0 2px 8px rgba(33, 118, 255, 0.08); */
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .recent-post-img {
@@ -96,8 +107,8 @@
 
 .recent-post-content {
   background-color: #232526;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
   padding: 28px 24px 20px 24px;
   width: 100%;
   box-sizing: border-box;
@@ -231,7 +242,7 @@ a:hover {
 /* Header */
 .site-header {
   background-color: #000;
-  padding: 6px 0 4px 0;
+  padding: 24px 0 4px 0; /* Increased top padding for logo glow */
   border-bottom: none;
   /* box-shadow: 0 2px 12px rgba(33, 118, 255, 0.08); */
 }
@@ -248,7 +259,7 @@ a:hover {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 18px;
+  gap: 8px;
   justify-content: flex-start;
 }
 .site-header .main-nav li a {
@@ -295,7 +306,7 @@ a:hover {
 /* Live banner */
 .live-banner {
   background: transparent;
-  padding: 24px 0 0 0;
+  padding: 10px 0 0 0; /* Increased top padding for more space below header */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -461,14 +472,7 @@ a:hover {
   margin: 0 0 7px 0;
   text-align: left;
 }
-.live-banner {
-  background: none;
-  margin: 0 0 0 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .live-banner .container {
   width: 98vw;
   max-width: 1800px;

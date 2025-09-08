@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <link rel="icon" type="image/png" href="{{ "/images/favicon.png" | relURL }}" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title
+      }} | {{ .Site.Title }}{{ end }}{{ end }}
+    </title>
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  </head>
+  <body>
+    <div class="starfield" aria-hidden="true">
+      <!-- 70 stars with more organic, math-based positions and animation delays -->
+      {{ $starCount := 70 }}
+      {{ $duration := 4.0 }}
+      {{ $seq := shuffle (seq 1 $starCount) }}
+      {{ range $i, $v := $seq }}
+        {{ $top := mod (add (mul (pow $v 2) 17) (mul $i 31)) 100 }}
+        {{ $left := mod (add (mul (pow $i 2) 23) (mul $v 47)) 100 }}
+        {{ $delay := (mul $i (div $duration $starCount)) }}
+        <div class="star" style="top:{{ $top }}%;left:{{ $left }}%;animation-delay:{{ printf "%.2fs" $delay }};"></div>
+      {{ end }}
+    </div>
+    {{ if not .IsHome }} {{ partial "header.html" . }} {{ end }} {{ block "main"
+    . }}{{ end }} {{ if not .IsHome }}
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+      </div>
+    </footer>
+    {{ end }}
+    <!-- <script src="{{ "js/starfield-bg.js" | relURL }}"></script> -->
+  </body>
+</html>
