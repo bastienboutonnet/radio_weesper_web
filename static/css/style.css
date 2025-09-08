@@ -1,6 +1,22 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;500&display=swap');
-/* Starfield background */
+@media (max-width: 700px) {
+  .centered-logo {
+    filter: none !important;
+    animation: none !important;
+  }
+  .centered-date {
+    animation: none !important;
+    background: none !important;
+    color: #afdcff !important;
+    background-clip: initial !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+  }
+}
+
+"/* Starfield background */
 .starfield {
   position: fixed;
   top: 0; left: 0;
