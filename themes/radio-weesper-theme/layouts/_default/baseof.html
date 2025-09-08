@@ -11,14 +11,14 @@
     <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   </head>
   <body>
-    {{ if not .IsHome }} {{ partial "header.html" . }} {{ end }} {{ block "main"
-    . }}{{ end }} {{ if not .IsHome }}
+    {{ partial "starfield-canvas.html" . }} {{ if not .IsHome }} {{ partial
+    "header.html" . }} {{ end }} {{ block "main" . }}{{ end }} {{ if not .IsHome
+    }}
     <footer class="site-footer">
       <div class="container">
         <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
       </div>
     </footer>
     {{ end }}
-    <!-- <script src="{{ "js/starfield-bg.js" | relURL }}"></script> -->
   </body>
 </html>
