@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ctx.fill();
       ctx.restore();
     }
-    requestAnimationFrame(draw);
+  // requestAnimationFrame(draw); // Animation temporarily disabled
   }
   draw();
 });
