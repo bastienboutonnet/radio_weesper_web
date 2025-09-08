@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const STAR_GLOW = '#afdcff';
   const STAR_MIN_RADIUS = 0.5;
   const STAR_MAX_RADIUS = 1.7;
-  const STAR_COUNT = 90;
+  // Reduce star count for mobile performance
+  const STAR_COUNT = window.innerWidth < 700 ? 32 : 60;
   const TWINKLE_SPEED = 0.025;
 
   // Use existing canvas if present, else create one
@@ -45,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
     canvas.style.height = window.innerHeight + 'px';
   }
   resizeCanvas();
-  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    createStars();
+  });
 
 
   function random(min, max) {
@@ -73,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function draw() {
-    resizeCanvas();
     const w = canvas.width;
     const h = canvas.height;
     const ctx = canvas.getContext('2d');
@@ -97,12 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
       const twinkle = 0.5 + 0.5 * Math.sin(now * star.twinkleSpeed + star.twinklePhase);
       let alpha = star.baseAlpha * twinkle;
       let radius = star.r;
-      let shadowBlur = 8;
+  let shadowBlur = 4;
       // Add super-glow effect smoothly
       if (star.superGlowLevel > 0.01) {
         alpha = alpha * (1 - star.superGlowLevel) + 1.0 * star.superGlowLevel;
         radius = radius * (1 - star.superGlowLevel) + (star.r * 2.1) * star.superGlowLevel;
-        shadowBlur = shadowBlur * (1 - star.superGlowLevel) + 48 * star.superGlowLevel;
+        shadowBlur = shadowBlur * (1 - star.superGlowLevel) + 24 * star.superGlowLevel;
       }
       ctx.save();
       ctx.globalAlpha = alpha;
