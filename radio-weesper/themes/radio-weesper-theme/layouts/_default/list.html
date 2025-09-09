@@ -1,23 +1,41 @@
 {{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }} {{ define "main"
 }}
-<main class="list-page container">
-  <h1>{{ .Title }}</h1>
-
-  <div class="list-posts">
-    {{ range .Pages }}
-    <article class="list-post">
-      <h2 class="list-post-title">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-      </h2>
-      {{ with .Params.showtime }}
-      <p class="list-post-time">{{ . }}</p>
-      {{ end }} {{ if .Params.description }}
-      <p class="list-post-summary">{{ .Params.description }}</p>
-      {{ else }}
-      <p class="list-post-summary">{{ .Summary }}</p>
+<main class="archive-page container">
+  <section class="recent-section container">
+    <!-- <h1>{{ .Title }}</h1> -->
+    <h2 class="recent-heading page-title">All Shows</h2>
+    <div class="recent-posts">
+      {{ range (where .Site.RegularPages "Section" "post") }}
+      <article class="recent-post">
+        {{ with .Params.image }}
+        <img
+          class="recent-post-img"
+          src="{{ . | relURL }}"
+          alt="{{ $.Title }}"
+        />
+        {{ end }}
+        <div class="recent-post-content">
+          <h3 class="recent-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <p class="recent-date">
+            {{ .Date.Format "02 Jan 2006" }}{{ with .Params.showtime }}
+            <span class="recent-time">| {{ . }}</span>{{ end }}
+          </p>
+          <div class="post-tags">
+            {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
+              >{{ . }}</span
+            >{{ end }} {{ end }}
+          </div>
+          {{ if .Params.description }}
+          <p class="show-description">{{ .Params.description }}</p>
+          {{ else }}
+          <p class="show-description">{{ .Summary }}</p>
+          {{ end }}
+        </div>
+      </article>
       {{ end }}
-    </article>
-    {{ end }}
-  </div>
+    </div>
+  </section>
 </main>
 {{ end }}
