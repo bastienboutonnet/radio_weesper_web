@@ -2,9 +2,11 @@
 baseURL = "/"
 title = "Radio Weesper"
 theme = "radio-weesper-theme"
-# Configure default layout to handle posts
+
 [params]
+radio_online = true
 # Additional custom parameters can be added here
+
 [menu]
 	[[menu.main]]
 		name = "Home"

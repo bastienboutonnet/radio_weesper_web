@@ -1,12 +1,13 @@
 <script src="/js/live-marquee.js"></script>
 <!-- Live banner -->
-{{ if not .IsHome }}
+{{ $online := .Site.Params.radio_online }} {{ if not .IsHome }}
 <a href="/" style="text-decoration: none; color: inherit">
   {{ end }}
   <section class="live-banner">
     <div class="container">
       <div class="live-banner-pill-inverted">
         <div class="flex-center">
+          {{ if $online }}
           <span class="live-now-label">LIVE NOW</span>
           <span class="circle-indicator"></span>
           <div class="live-banner-marquee">
@@ -21,6 +22,15 @@
             </span>
             {{ end }}
           </div>
+          {{ else }}
+          <span class="live-now-label offline">OFFLINE</span>
+          <span class="square-indicator offline"></span>
+          <div class="live-banner-marquee">
+            <span class="marquee-span-static">
+              The radio is currently offline. Please check the schedule below.
+            </span>
+          </div>
+          {{ end }}
         </div>
         {{ with .Params.tags }}
         <div class="post-tags">

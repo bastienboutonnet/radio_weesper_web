@@ -170,6 +170,12 @@ html, body {
   margin-right: 12px;
   padding-left: 12px;
 }
+.live-now-label.offline {
+  color: #888;
+  font-weight: 600;
+  opacity: 0.7;
+  margin-right: 8px;
+}
 /* Utility classes for inline style cleanup from index.html */
 .flex-center {
   display: flex;
@@ -187,6 +193,20 @@ html, body {
   margin: 0 8px 0 8px;
   box-shadow: 0 0 6px #ff3366;
   flex-shrink: 0;
+}
+.square-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: #888;
+  margin: 0 8px 0 8px;
+  box-shadow: none;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+.square-indicator.offline {
+  background: #888;
+  opacity: 0.7;
 }
 .live-banner-marquee {
   position: relative;
