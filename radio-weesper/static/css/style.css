@@ -71,7 +71,7 @@ html, body {
 .page-title {
   font-size: 1.1rem;
   margin: 8px 0 10px 0;
-  color: #A4C2E0;
+  color: #afdcff;
   text-align: left;
   font-weight: 700;
   font-family: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
@@ -311,7 +311,7 @@ a {
 }
 .site-header .logo a {
   font-size: 2rem;
-  color: #A4C2E0;
+  color: #afdcff;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -326,7 +326,7 @@ a {
   justify-content: flex-start;
 }
 .site-header .main-nav li a {
-  color: #A4C2E0;
+  color: #afdcff;
   font-weight: 700;
   text-transform: uppercase;
   font-family: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
