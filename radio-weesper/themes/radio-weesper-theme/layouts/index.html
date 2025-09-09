@@ -46,16 +46,7 @@
         alt="{{ $.Title }}"
       />
       {{ end }} -->
-      <div
-        class="now-playing-info"
-        style="
-          flex: 1 1 auto;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-        "
-      >
+  <div class="now-playing-info">
         <h3 class="show-title">{{ .Title }}</h3>
         {{ if and .Params.showtime .Params.showendtime }}
         <p class="show-time">
