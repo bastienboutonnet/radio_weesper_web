@@ -1,6 +1,3 @@
-/* Base styling * THIS MUST BE KEPT AT THE TOP FOR IMPORTS TO WORK */
-@import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;500&display=swap');
 /* Blue glow for header logo */
 .site-header .logo img {
   border-radius: 20%;
@@ -53,12 +50,13 @@
 
 /* Generic page title style for all main headings */
 .page-title {
-  font-size: 2rem;
+  font-size: 1.1rem;
   margin: 8px 0 10px 0;
   color: #A4C2E0;
   text-align: left;
   font-weight: 700;
   font-family: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
+  text-transform: capitalize;
 }
 
 .recent-posts {
@@ -238,6 +236,22 @@ a:hover {
   padding-left: 24px;
   padding-right: 24px;
   box-sizing: border-box;
+}
+
+/* Make recent-section flush with viewport edges like live-banner */
+.recent-section.container,
+.recent-section > .container {
+  width: 98vw;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.recent-posts {
+  padding-left: 0;
+  padding-right: 0;
 }
 /* Header */
 .site-header {
