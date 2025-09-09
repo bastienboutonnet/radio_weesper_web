@@ -31,7 +31,7 @@
   </section>
 
   <!-- Player + Now Playing -->
-  <section class="player-section container">
+  <section class="player-section">
     <div class="player">
       <p class="media-message">VIDEO PLAYER</p>
     </div>
@@ -63,6 +63,7 @@
         </p>
         {{ else if .Params.showtime }}
         <p class="show-time">{{ .Params.showtime }}</p>
+        <section class="recent-section container">
         {{ else if .Params.showendtime }}
         <p class="show-time">{{ .Params.showendtime }}</p>
         {{ end }} {{ if .Params.description }}
