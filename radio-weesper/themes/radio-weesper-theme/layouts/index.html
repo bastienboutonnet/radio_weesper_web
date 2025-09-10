@@ -5,62 +5,8 @@
   {{ partial "live-banner.html" . }}
 
   <!-- Player + Now Playing or Schedule -->
-  {{ $online := .Site.Params.radio_online }}
-  <section class="player-section">
-    <div class="player">
-      <p class="media-message">VIDEO PLAYER</p>
-    </div>
-
-    {{ if $online }} {{ with index (first 1 (where .Site.RegularPages "Section"
-    "post")) 0 }}
-    <aside class="now-playing">
-      <!-- ...existing code for now playing... -->
-      <!-- <h2 class="now-playing-heading">Now Playing</h2> -->
-      <!-- {{ with .Params.image }}
-          <img
-            class="now-playing-image"
-            src="{{ . | relURL }}"
-            alt="{{ $.Title }}"
-          />
-          {{ end }} -->
-      <div class="now-playing-info">
-        <h3 class="show-title">{{ .Title }}</h3>
-        {{ if and .Params.showtime .Params.showendtime }}
-        <p class="show-time">
-          {{ .Params.showtime }} - {{ .Params.showendtime }}
-        </p>
-        {{ else if .Params.showtime }}
-        <p class="show-time">{{ .Params.showtime }}</p>
-        {{ else if .Params.showendtime }}
-        <p class="show-time">{{ .Params.showendtime }}</p>
-        {{ end }} {{ if .Params.description }}
-        <p class="show-description">{{ .Params.description }}</p>
-        {{ else }}
-        <p class="show-description">{{ .Summary }}</p>
-        {{ end }}
-        <div class="post-tags" style="margin-top: auto">
-          {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
-            >{{ . }}</span
-          >{{ end }} {{ end }}
-        </div>
-      </div>
-    </aside>
-    {{ else }}
-    <aside class="now-playing">
-      <h2 class="now-playing-heading">Now Playing</h2>
-      <p class="show-description">
-        No show yet. Add a post in <code>content/post/</code>.
-      </p>
-    </aside>
-    {{ end }} {{ else }}
-    <aside class="now-playing">
-      <h2 class="now-playing-heading">Schedule</h2>
-      <p class="show-description">
-        The radio is currently offline. The schedule will appear here soon.
-      </p>
-    </aside>
-    {{ end }}
-  </section>
+  {{ if .Site.Params.radio_online }} {{ partial "player-online.html" . }} {{
+  else }} {{ partial "player-offline.html" . }} {{ end }}
 
   <!-- Recent shows -->
   <section class="recent-section container">

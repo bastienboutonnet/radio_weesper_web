@@ -1,0 +1,37 @@
+<section class="player-section">
+  <div class="player">
+    <p class="media-message">VIDEO PLAYER</p>
+  </div>
+  {{ with index (first 1 (where .Site.RegularPages "Section" "post")) 0 }}
+  <aside class="now-playing">
+    <div class="now-playing-info">
+      <h3 class="show-title">{{ .Title }}</h3>
+      {{ if and .Params.showtime .Params.showendtime }}
+      <p class="show-time">
+        {{ .Params.showtime }} - {{ .Params.showendtime }}
+      </p>
+      {{ else if .Params.showtime }}
+      <p class="show-time">{{ .Params.showtime }}</p>
+      {{ else if .Params.showendtime }}
+      <p class="show-time">{{ .Params.showendtime }}</p>
+      {{ end }} {{ if .Params.description }}
+      <p class="show-description">{{ .Params.description }}</p>
+      {{ else }}
+      <p class="show-description">{{ .Summary }}</p>
+      {{ end }}
+      <div class="post-tags" style="margin-top: auto">
+        {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
+          >{{ . }}</span
+        >{{ end }} {{ end }}
+      </div>
+    </div>
+  </aside>
+  {{ else }}
+  <aside class="now-playing">
+    <h2 class="now-playing-heading">Now Playing</h2>
+    <p class="show-description">
+      No show yet. Add a post in <code>content/post/</code>.
+    </p>
+  </aside>
+  {{ end }}
+</section>
