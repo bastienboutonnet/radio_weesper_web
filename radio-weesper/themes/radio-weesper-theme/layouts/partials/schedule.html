@@ -1,0 +1,119 @@
+<section class="schedule-container">
+  {{/* Get all posts in the next 3 weeks */}} {{ $now := now }} {{ $end :=
+  $now.AddDate 0 0 21 }} {{ $shows := where (where .Site.Pages "Section" "post")
+  "Date" ">=" $now }} {{ $shows := where $shows "Date" "<" $end }}
+  <!-- Debug info removed -->
+  {{ $days := slice }} {{ range $shows }} {{ $day := .Date.Format "Monday, 02 Jan 2006" }} {{ if not (in $days $day) }} {{ $days = $days | append $day }} {{
+  end }} {{ end }}
+  <div class="schedule-days">
+    {{ range $days }} {{ $day := . }}
+    <div class="schedule-day">
+      <div class="schedule-day-header">{{ $day }}</div>
+      <ul class="schedule-shows">
+  {{ $showsForDay := slice }} {{ range $shows }} {{ if eq (.Date.Format "Monday, 02 Jan 2006") $day }} {{ $showsForDay = $showsForDay | append . }} {{ end }} {{ end }} {{ range sort $showsForDay "Params.showtime" }}
+        {{ $showtime := .Params.showtime }}
+        {{ $title := .Title }}
+        {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
+        <li class="schedule-show">
+          <span class="schedule-time-title">
+            <span class="schedule-time">
+              {{- if .Params.showendtime -}} {{ .Params.showtime }} - {{ .Params.showendtime }} {{- else -}} {{ .Params.showtime }} {{- end -}}
+            </span>
+            <span class="schedule-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </span>
+          </span>
+        </li>
+        {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+  </div>
+</section>
+<style>
+  .schedule-container {
+    background: #000;
+    color: #fff;
+    padding: 2rem 1rem;
+    overflow-x: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .schedule-days {
+    display: flex;
+    gap: 2rem;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .schedule-day {
+    min-width: 320px;
+    flex: 1 1 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 1.5rem;
+  }
+  .schedule-day-header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    width: 100%;
+    height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .schedule-shows {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .schedule-show {
+    margin-bottom: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.1rem;
+  }
+  .schedule-time-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .schedule-time {
+    font-weight: 500;
+    font-size: 1rem;
+    color: #fff;
+    min-width: 90px;
+  }
+  .schedule-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #fff;
+  }
+  .schedule-title a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .schedule-title a:hover {
+    color: #ffb347;
+  }
+    margin-bottom: 0.1rem;
+    white-space: nowrap;
+  }
+  .schedule-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #fff;
+  }
+</style>
