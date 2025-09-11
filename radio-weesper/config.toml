@@ -17,3 +17,8 @@ radio_online = true
 		name = "Archive"
 		url = "/archive/"
 		weight = 2
+
+	[[menu.main]]
+		name = "Schedule"
+		url = "/schedule/"
+		weight = 3

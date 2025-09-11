@@ -1,3 +1,102 @@
+/* Hamburger menu styles */
+/* Robust hamburger menu with absolute bars */
+.hamburger {
+  display: none;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  z-index: 1002;
+}
+
+.hamburger .bar {
+  position: absolute;
+  left: 7px;
+  width: 26px;
+  height: 3px;
+  background: #afdcff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.hamburger .bar1 {
+  top: 11px;
+}
+
+.hamburger .bar2 {
+  top: 18.5px;
+}
+
+.hamburger .bar3 {
+  top: 26px;
+}
+
+.hamburger.open .bar1 {
+  top: 18.5px;
+  transform: rotate(45deg);
+}
+
+.hamburger.open .bar2 {
+  opacity: 0;
+}
+
+.hamburger.open .bar3 {
+  top: 18.5px;
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+  .main-nav {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 100vw;
+    background: #181a1b;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    border-top: 1.5px solid #afdcff;
+    border-bottom: 1.5px solid #afdcff;
+    z-index: 1001;
+    display: none !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 20px 12px 12px 12px;
+    margin: 0;
+  }
+
+  .main-nav.open {
+    display: flex !important;
+  }
+
+  .main-nav-list {
+    flex-direction: column !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-nav-list li {
+    width: 100%;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    display: block !important;
+  }
+
+  .main-nav-link {
+    width: 100%;
+    display: block;
+    padding: 8px 0;
+    font-size: 1.1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
 /* Prevent overflow in now-playing-info */
 .now-playing-info {
   max-width: 100%;
