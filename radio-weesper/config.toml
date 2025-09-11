@@ -4,7 +4,7 @@ title = "Radio Weesper"
 theme = "radio-weesper-theme"
 
 [params]
-radio_online = false
+radio_online = true
 # Additional custom parameters can be added here
 
 [menu]
