@@ -346,6 +346,18 @@ a {
     border-radius: 10px;
     box-sizing: border-box;
   }
+
+  /* Stack schedule days vertically on mobile */
+  .schedule-days {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Slow down the live banner marquee on mobile */
+  .marquee-span,
+  .marquee-span-alt {
+    animation-duration: 32s !important;
+  }
 }
 
 .recent-section.container,
