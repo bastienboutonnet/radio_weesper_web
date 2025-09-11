@@ -1,0 +1,42 @@
+{{ define "main" }}
+<h1>Search</h1>
+<input id="search-input" type="text" placeholder="Search..." />
+<ul id="results"></ul>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+<script>
+  const searchInput = document.getElementById('search-input');
+  const results = document.getElementById('results');
+
+  async function init() {
+    const res = await fetch('/post/index.json');
+    const data = await res.json();
+
+    const fuse = new Fuse(data, {
+      keys: ['title', 'summary', 'content'],
+      threshold: 0.3
+    });
+
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim();
+      if (!query) {
+        results.innerHTML = '';
+        return;
+      }
+
+      const matches = fuse.search(query);
+
+      results.innerHTML = matches
+        .map(m => `
+          <li>
+            <a href="${m.item.permalink}">${m.item.title}</a>
+            <p>${m.item.summary}</p>
+          </li>
+        `)
+        .join('');
+    });
+  }
+
+  init();
+</script>
+{{ end }}

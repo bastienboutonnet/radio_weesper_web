@@ -1,4 +1,3 @@
-
 baseURL = "https://localhost:1313/"
 title = "Radio Weesper"
 theme = "radio-weesper-theme"
@@ -6,6 +5,9 @@ theme = "radio-weesper-theme"
 [params]
 radio_online = true
 # Additional custom parameters can be added here
+
+[outputs]
+	section = ["HTML", "JSON"]
 
 [menu]
 	[[menu.main]]
@@ -21,4 +23,8 @@ radio_online = true
 	[[menu.main]]
 		name = "Schedule"
 		url = "/schedule/"
-		weight = 3
+		weight = 3	
+	[[menu.main]]
+		name = "Search"
+		url = "/search/"
+		weight = 4	
