@@ -2,7 +2,6 @@
 {{- range .Site.RegularPages -}}
   {{- $.Scratch.Add "index" (dict
       "title" .Title
-      "summary" .Summary
       "permalink" .Permalink
       "content" .Plain
   ) -}}
