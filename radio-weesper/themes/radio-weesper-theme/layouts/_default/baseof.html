@@ -11,8 +11,7 @@
   {{ $scss := resources.Get "scss/main.scss" | css.Sass $opts }}
   <link rel="stylesheet" href="{{ $scss.RelPermalink }}">
   <!-- Fallback during dev: {{ "css/style.css" | relURL }} -->
-  <link
-    rel="stylesheet" href="{{ "css/fonts.css" | relURL }}"> {{ partial
+  {{ partial
     "favicon.html" . }}
     <link
       rel="stylesheet"

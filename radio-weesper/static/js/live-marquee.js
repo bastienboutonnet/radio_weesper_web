@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!titleSpan) return;
 
     var titleText = titleSpan.textContent;
-    var space = ' \u00A0\u00A0\u00A0 ';
+    // Bigger gap between repeats (8 NBSPs)
+    var space = ' \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0 ';
 
     // Create a temporary span to measure width
     var tempSpan = document.createElement('span');
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     titleSpan.style.display = 'inline-block';
     titleSpan.style.minWidth = (titleWidth * repeatCount) + 'px';
 
-    // Animate using CSS (slower: 32s)
-    titleSpan.style.animation = 'live-marquee-infinite 32s linear infinite';
+    // Much slower animation
+    titleSpan.style.animation = 'live-marquee-infinite 100s linear infinite';
   });
 });

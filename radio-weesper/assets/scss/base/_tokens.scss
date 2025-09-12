@@ -1,12 +1,12 @@
 /* Design Tokens (SCSS + CSS variables) */
 :root {
     // Colors
-    --color-bg: #000;
+    --color-bg: #020b34;
     --color-surface: #181A20;
-    --color-ink-dark: #181a1b;
+    --color-ink-dark: #000;
     --color-text: #E6E8EF;
     --color-muted: #b0b8c1;
-    --color-accent: #afdcff;
+    --color-accent: #ec5c28;
     --color-accent-2: #A4C2E0;
     --color-live: #FF3366;
     --color-live-alt: #e48c1a;
@@ -40,8 +40,8 @@
     --spacing-8: 32px;
 
     // Fonts
-    --font-display: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
-    --font-sans: 'Space Grotesk', 'Poppins', 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
+    --font-display: 'Space Grotesk', Helvetica, sans-serif;
+    --font-sans: 'Satoshi', 'Poppins', 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
 
     // Borders & shadows
     --border-ink-2: 2px solid var(--color-ink-dark);
@@ -52,6 +52,8 @@
     // Layout tokens
     --player-width-desktop: 70%;
     --now-playing-width-desktop: 30%;
+    --header-height: 58px;
+    --header-height-mobile: 56px;
 }
 
 /* Token legend

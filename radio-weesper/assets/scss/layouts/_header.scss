@@ -5,6 +5,10 @@
     background-color: var(--color-bg);
 
     >.container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-4);
         box-sizing: border-box;
         width: 100vw;
         max-width: 100vw;
@@ -12,6 +16,14 @@
         margin-left: auto;
         padding-right: var(--spacing-4);
         padding-left: 0;
+    }
+
+    /* Make the left group (logo + hamburger + nav) stretch so nav can right-align */
+    >.container>div:first-child {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        gap: var(--pad-x);
     }
 
     .logo a {
@@ -26,10 +38,16 @@
     .main-nav ul {
         display: flex;
         justify-content: flex-start;
-        gap: var(--spacing-2);
+        gap: var(--spacing-6);
         margin: 0;
         padding: 0;
         list-style: none;
+    }
+
+    /* Push nav to the right before social icons */
+    .main-nav {
+        margin-left: auto;
+        margin-right: var(--spacing-4);
     }
 
     .main-nav li a {
@@ -41,8 +59,8 @@
 
     .main-nav-list .main-nav-link {
         margin: 0;
-        font-size: 1.1rem;
-        line-height: 1.1;
+        font-size: 1.3rem;
+        line-height: 1.2;
         text-transform: capitalize;
     }
 }
@@ -101,8 +119,10 @@
     .main-nav {
         display: none !important;
         position: absolute;
-        top: 68px;
+        top: var(--header-height);
         left: 0;
+        margin-left: 0;
+        /* reset desktop push */
         z-index: 1001;
         flex-direction: column !important;
         align-items: flex-start !important;
