@@ -7,7 +7,9 @@
       {{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title
       }} | {{ .Site.Title }}{{ end }}{{ end }}
     </title>
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}"> <link
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+  <!-- Fallback during dev: {{ "css/style.css" | relURL }} -->
+  <link
     rel="stylesheet" href="{{ "css/fonts.css" | relURL }}"> {{ partial
     "favicon.html" . }}
     <link
