@@ -107,10 +107,8 @@
         word-break: break-word;
         overflow-wrap: anywhere;
     }
-}
 
-/* Constrain tag row width inside Now Playing, responsive via container query */
-.now-playing {
+    /* Constrain tag row width inside Now Playing, responsive via container query */
     .post-tags {
         width: 70%;
     }

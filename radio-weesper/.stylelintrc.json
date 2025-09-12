@@ -1,9 +1,11 @@
 {
+  "customSyntax": "postcss-scss",
   "extends": [
-    "stylelint-config-standard"
+    "stylelint-config-standard-scss"
   ],
   "plugins": [
-    "stylelint-order"
+    "stylelint-order",
+    "stylelint-scss"
   ],
   "rules": {
   "color-hex-length": null,
