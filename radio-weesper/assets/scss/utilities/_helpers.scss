@@ -12,7 +12,7 @@
     flex-shrink: 0;
     width: 12px;
     height: 12px;
-    margin: 0 var(--spacing-1) 0 2px;
+    margin: 0 var(--spacing-3) 0 2px;
     border-radius: 50%;
     background: var(--color-live);
     box-shadow: 0 0 6px var(--color-live);
@@ -37,7 +37,20 @@
 .social-icons {
     display: flex;
     align-items: center;
-    gap: var(--spacing-4-5);
+    gap: var(--spacing-4);
+}
+
+/* Normalize social icons for consistent vertical alignment */
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icons img {
+    width: 24px !important;
+    height: 24px !important;
+    display: block;
 }
 
 /* Blue glow for header logo */
@@ -47,5 +60,4 @@
     height: 48px;
     max-height: 48px;
     border-radius: 20%;
-    filter: drop-shadow(0 0 8px rgba(164, 194, 224, 0.7)) drop-shadow(0 0 10px rgba(164, 194, 224, 0.5));
 }
