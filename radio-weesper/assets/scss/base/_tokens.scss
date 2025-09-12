@@ -1,0 +1,63 @@
+/* Design Tokens (SCSS + CSS variables) */
+:root {
+    // Colors
+    --color-bg: #000;
+    --color-surface: #181A20;
+    --color-ink-dark: #181a1b;
+    --color-text: #E6E8EF;
+    --color-muted: #b0b8c1;
+    --color-accent: #afdcff;
+    --color-accent-2: #A4C2E0;
+    --color-live: #FF3366;
+    --color-live-alt: #e48c1a;
+
+    // Additional palette
+    --color-accent-soft: #ACD6FB;
+    /* rgb(172, 214, 251) */
+    --color-muted-2: #999;
+    --color-muted-3: #888;
+    --color-subtle: #666;
+    --color-card-bg: #232526;
+
+    // Radii
+    --radius: 10px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-pill: 999px;
+
+    // Spacing
+    --spacing-1: 4px;
+    --spacing-2: 8px;
+    --spacing-2-5: 10px;
+    /* half step used frequently */
+    --spacing-3: 12px;
+    --spacing-4: 16px;
+    --spacing-4-5: 18px;
+    /* half step used for some gaps */
+    --spacing-5: 20px;
+    --spacing-6: 24px;
+    --spacing-7: 28px;
+    --spacing-8: 32px;
+
+    // Fonts
+    --font-display: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
+    --font-sans: 'Space Grotesk', 'Poppins', 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
+
+    // Borders & shadows
+    --border-ink-2: 2px solid var(--color-ink-dark);
+    --border-accent-15: 1.5px solid var(--color-accent);
+    --shadow-card: 0 4px 24px rgba(33, 33, 33, 0.18);
+    --pad-x: 12px;
+
+    // Layout tokens
+    --player-width-desktop: 70%;
+    --now-playing-width-desktop: 30%;
+}
+
+/* Token legend
+  - Colors: --color-* cover background, surfaces, text, accents, and live states.
+  - Spacing: --spacing-[1..8] map to 4,8,12,16,20,24,28,32px; half-steps: --spacing-2-5 (10px), --spacing-4-5 (18px).
+  - Radius: --radius (10px), --radius-sm (6px), --radius-md (8px), --radius-pill (999px).
+  - Fonts: --font-display for headings/badges; --font-sans for body UI.
+  - Borders/Shadows: --border-*, --shadow-card; Layout paddings use --pad-x.
+*/
