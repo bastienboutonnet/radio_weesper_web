@@ -1,170 +1,62 @@
-<section class="schedule-container">
-  <h2 class="recent-heading page-title" style="text-align:left;">Upcoming Shows</h2>
-  {{/* Get all posts in the next 3 weeks */}} {{ $now := now }} {{ $end :=
-  $now.AddDate 0 0 21 }} {{ $shows := where (where .Site.Pages "Section" "post")
-  "Date" ">=" $now }} {{ $shows := where $shows "Date" "<" $end }}
-  <!-- Debug info removed -->
-  {{ $days := slice }} {{ range $shows }} {{ $day := .Date.Format "Mon, 02 Jan" }} {{ if not (in $days $day) }} {{ $days = $days | append $day }} {{
-  end }} {{ end }}
-  <div class="schedule-days">
+<section class="schedule-section">
+  <div class="schedule-header-row">
+    <h2 class="schedule-title">Schedule</h2>
+  </div>
+  <div class="schedule-timezone">Timezone: Amsterdam (CEST)</div>
+  <!-- <hr class="schedule-divider" /> -->
+  {{/* Get all posts in the next 3 weeks */}}
+  {{ $now := now }}
+  {{ $end := $now.AddDate 0 0 21 }}
+  {{ $shows := where (where .Site.Pages "Section" "post") "Date" ">=" $now }}
+  {{ $shows := where $shows "Date" "<" $end }}
+  {{ $days := slice }}
+  {{ range $shows }}
+    {{ $day := .Date.Format "Mon, 02 Jan" }}
+    {{ if not (in $days $day) }}
+      {{ $days = $days | append $day }}
+    {{ end }}
+  {{ end }}
+  <div class="schedule-grid">
     {{ $daysCount := len $days }}
     {{ range $i, $v := $days }}
       {{ $revIndex := sub (sub $daysCount $i) 1 }}
       {{ $day := index $days $revIndex }}
-    <div class="schedule-day">
-  {{/* Split $day into parts: day name, digits, month */}}
-  {{ $parts := split $day ", " }}
-  {{ $dayName := index $parts 0 }}
-  {{ $rest := index $parts 1 }}
-  {{ $restParts := split $rest " " }}
-  {{ $dayDigits := index $restParts 0 }}
-  {{ $month := index $restParts 1 }}
-  <div class="schedule-day-header">
-    <span class="schedule-day-name">{{ $dayName }},</span>
-    <span class="schedule-day-rest"> {{ $dayDigits }} {{ $month }}</span>
-  </div>
-  <div class="schedule-day-separator"></div>
-  <ul class="schedule-shows">
-  {{ $showsForDay := slice }} {{ range $shows }} {{ if eq (.Date.Format "Mon, 02 Jan") $day }} {{ $showsForDay = $showsForDay | append . }} {{ end }} {{ end }} {{ range sort $showsForDay "Params.showtime" }}
-        {{ $showtime := .Params.showtime }}
-        {{ $title := .Title }}
-        {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
-        <li class="schedule-show">
-          <span class="schedule-time-title">
-            <span class="schedule-time" style="font-weight: 400; opacity: 0.85;">
-              {{- if .Params.showendtime -}} {{ .Params.showtime }} - {{ .Params.showendtime }} {{- else -}} {{ .Params.showtime }} {{- end -}}
-            </span>
-            <span class="schedule-title" style="font-weight: 700; text-transform: uppercase;">
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </span>
-          </span>
-        </li>
-        {{ end }}
-        {{ end }}
-      </ul>
-    </div>
+      {{/* Split $day into parts: day name, digits, month */}}
+      {{ $parts := split $day ", " }}
+      {{ $dayName := index $parts 0 }}
+      {{ $rest := index $parts 1 }}
+      {{ $restParts := split $rest " " }}
+      {{ $dayDigits := index $restParts 0 }}
+      {{ $month := index $restParts 1 }}
+      <div class="schedule-day-column">
+        <div class="schedule-day-pill">{{ $dayName }}, {{ $dayDigits }} {{ $month }}</div>
+        <ul class="schedule-shows">
+          {{ $showsForDay := slice }}
+          {{ range $shows }}
+            {{ if eq (.Date.Format "Mon, 02 Jan") $day }}
+              {{ $showsForDay = $showsForDay | append . }}
+            {{ end }}
+          {{ end }}
+          {{ range sort $showsForDay "Params.showtime" }}
+            {{ $showtime := .Params.showtime }}
+            {{ $title := .Title }}
+            {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
+              <li class="schedule-show">
+                <span class="schedule-show-time">
+                  {{- if .Params.showendtime -}}
+                    {{ .Params.showtime }} - {{ .Params.showendtime }}
+                  {{- else -}}
+                    {{ .Params.showtime }}
+                  {{- end -}}
+                </span>
+                <span class="schedule-show-title">
+                  <a href="{{ .RelPermalink }}" style="text-transform: uppercase; font-weight: 700; color: #181a1b;">{{ .Title }}</a>
+                </span>
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
     {{ end }}
   </div>
 </section>
-<style>
-  .schedule-container {
-    /* background removed for consistency */
-    color: #fff;
-    padding: 0 0 1.5rem 0;
-    overflow-x: auto;
-    width: 100vw;
-    box-sizing: border-box;
-    margin-left: 0 !important;
-  }
-  .schedule-days {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: flex-start;
-    width: auto;
-    padding: 0;
-    margin: 0;
-    align-items: flex-start;
-  }
-  .schedule-day {
-    min-width: 220px;
-    max-width: 340px;
-    flex: 1 1 0;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 0 1.5rem 0;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    margin-left: 0 !important;
-  }
-  /* Removed duplicate .schedule-days and .schedule-day rules */
-  .schedule-day-header {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.2rem;
-    letter-spacing: 1.5px;
-    color: #afdcff;
-    text-transform: capitalize;
-    text-align: left;
-    font-family: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
-    width: 100%;
-  }
-  .schedule-day-name {
-    font-weight: 700;
-  }
-  .schedule-day-rest {
-    font-weight: 400;
-    letter-spacing: 1px;
-  }
-  .schedule-day-separator {
-    border-top: 1.5px solid #444a54;
-    margin: 0.1rem 0 0.7rem 0;
-    width: 90%;
-    min-width: 120px;
-    max-width: 100%;
-    align-self: flex-start;
-    transform: none;
-  }
-  .schedule-day-header + .schedule-day-separator {
-    margin-top: 0;
-  }
-  .schedule-day-separator + .schedule-shows {
-    margin-top: 0.2rem;
-    padding-top: 0.5rem;
-  }
-  .schedule-shows {
-    /* ...existing code... */
-    text-align: left;
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-  }
-  .schedule-show {
-    text-align: left;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.7rem;
-  }
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.1rem;
-  }
-  .schedule-time-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  .schedule-time {
-    font-weight: 400;
-    font-size: 1rem;
-    color: #fff;
-    min-width: 90px;
-    opacity: 0.85;
-  }
-  .schedule-title {
-    font-weight: 700;
-    font-size: 1rem;
-    color: #fff;
-    text-transform: uppercase;
-  }
-  .schedule-title a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .schedule-title a:hover {
-    color: #ffb347;
-  }
-    margin-bottom: 0.1rem;
-    white-space: nowrap;
-  }
-  .schedule-title {
-    font-size: 1.05rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #fff;
-  }
-</style>
