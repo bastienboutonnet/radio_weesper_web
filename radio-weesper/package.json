@@ -15,7 +15,10 @@
     "purgecss": "^6.0.0",
     "sass": "^1.77.0",
     "stylelint": "^16.8.1",
-    "stylelint-config-standard": "^36.0.1",
-    "stylelint-order": "^6.0.4"
+  "stylelint-config-standard": "^36.0.1",
+  "stylelint-config-standard-scss": "^13.0.0",
+  "stylelint-order": "^6.0.4",
+  "stylelint-scss": "^6.7.0",
+  "postcss-scss": "^4.0.9"
   }
 }
