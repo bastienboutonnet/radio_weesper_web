@@ -28,10 +28,10 @@
           {{ end }}
           <div class="recent-post-content">
             <div class="upcoming-meta">
-              <span class="upcoming-pill upcoming-pill--date">{{ .Date.Format "Mon, 02 Jan" }}</span>
+              <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan" }}</span>
               {{- $stime := .Params.showtime -}}
               {{ if $stime }}
-              <span class="upcoming-pill upcoming-pill--time">{{ $stime }}</span>
+              <span class="upcoming-pill upcoming-pill-time">{{ $stime }}</span>
               {{ end }}
             </div>
             <h3 class="recent-title">

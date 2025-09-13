@@ -6,8 +6,8 @@
 
     >.container {
         display: flex;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
         gap: var(--spacing-4);
         box-sizing: border-box;
         width: 100vw;
@@ -20,20 +20,20 @@
 
     /* Make the left group (logo + hamburger + nav) stretch so nav can right-align */
     >.container>div:first-child {
-        flex: 1 1 auto;
         display: flex;
+        flex: 1 1 auto;
         align-items: center;
         gap: var(--pad-x);
     }
 
     .logo a {
+        padding: var(--spacing-2);
         font-family: var(--font-display);
         font-size: 2rem;
         font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        color: var(--color-accent);
-        padding: var(--spacing-2)
+        color: var(--color-accent)
     }
 
     .main-nav ul {
@@ -47,8 +47,8 @@
 
     /* Push nav to the right before social icons */
     .main-nav {
-        margin-left: auto;
         margin-right: var(--spacing-4);
+        margin-left: auto;
     }
 
     .main-nav li a {
@@ -122,13 +122,13 @@
         position: absolute;
         top: var(--header-height);
         left: 0;
-        margin-left: 0;
         /* reset desktop push */
         z-index: 1001;
         flex-direction: column !important;
         align-items: flex-start !important;
         width: 100vw;
         margin: 0;
+        margin-left: 0;
         padding: var(--spacing-5) var(--spacing-3) var(--spacing-3) var(--spacing-3);
         border-top: var(--border-accent-15);
         border-bottom: var(--border-accent-15);

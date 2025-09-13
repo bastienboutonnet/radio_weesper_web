@@ -43,14 +43,14 @@
 /* Normalize social icons for consistent vertical alignment */
 .social-icons a {
     display: inline-flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .social-icons img {
+    display: block;
     width: 24px !important;
     height: 24px !important;
-    display: block;
 }
 
 /* Blue glow for header logo */

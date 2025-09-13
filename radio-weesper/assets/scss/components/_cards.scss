@@ -3,12 +3,13 @@
     display: grid;
     justify-content: start;
     gap: var(--spacing-5);
-    width: 100%;
     box-sizing: border-box;
-    background-color: var(--color-accent-2);
+    width: 100%;
+
     // margin-bottom: var(--spacing-8);
     padding-right: var(--spacing-5);
     padding-left: var(--spacing-5);
+    background-color: var(--color-accent-2);
     /* Max 5 columns, responsive fallbacks */
     grid-template-columns: repeat(5, minmax(250px, 1fr));
     justify-items: start;
@@ -44,12 +45,12 @@
     width: 100%;
     margin: 0;
     padding: 0;
+    padding-bottom: var(--spacing-5);
     overflow: hidden;
     border: none;
     border-radius: 0;
     background: none;
     box-shadow: none;
-    padding-bottom: var(--spacing-5);
 }
 
 .recent-post img,
@@ -57,6 +58,7 @@
     display: block;
     width: 100%;
     aspect-ratio: 16/9;
+
     // border-bottom-left-radius: 0;
     // border-bottom-right-radius: 0;
     // border-top-left-radius: 0;
@@ -71,6 +73,7 @@
     box-sizing: border-box;
     width: 100%;
     padding: 0 var(--spacing-6) var(--spacing-5) 0;
+
     // border-bottom-left-radius: 0;
     // border-bottom-right-radius: 0;
 }
@@ -78,43 +81,43 @@
 /* Upcoming pills (date/time above title) */
 .upcoming-meta {
     display: flex;
-    gap: var(--spacing-2);
     align-items: center;
+    gap: var(--spacing-2);
     margin-top: var(--spacing-3);
 }
 
 .upcoming-pill {
     display: inline-flex;
     padding: 4px 12px;
-    border-radius: var(--radius-pill);
     border: none;
+    border-radius: var(--radius-pill);
     background: var(--color-ink-dark);
-    color: var(--color-accent);
     font-family: var(--font-display);
     font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.03em;
+    color: var(--color-accent);
 }
 
-.upcoming-pill--time {
+.upcoming-pill-time {
+    border: var(--border-ink-2);
     background: transparent;
     color: var(--color-ink-dark);
-    border: var(--border-ink-2);
 }
 
 /* removed border override for time pill to keep pills borderless */
 
 /* Latest Shows + Archive: orange date pill */
-.recent-section .upcoming-pill--date {
+.recent-section .upcoming-pill-date {
     background: var(--color-accent);
-    color: var(--color-bg);
     border-color: var(--color-bg);
+    color: var(--color-bg);
 }
 
 /* Latest/Archive: time pill uses site bg color for text and border */
-.recent-section .upcoming-pill--time {
-    color: var(--color-bg);
+.recent-section .upcoming-pill-time {
     border-color: var(--color-bg);
+    color: var(--color-bg);
 }
 
 .recent-title {
@@ -149,13 +152,13 @@
     display: block;
     box-sizing: border-box;
     width: 100%;
-    font-size: 28px;
-    background-color: var(--color-accent-2);
-    padding-left: var(--spacing-5);
+    margin: 0;
+    padding-top: var(--spacing-6);
     padding-right: var(--spacing-5);
     padding-bottom: var(--spacing-3);
-    padding-top: var(--spacing-6);
-    margin: 0;
+    padding-left: var(--spacing-5);
+    background-color: var(--color-accent-2);
+    font-size: 28px;
     /* connect visually with the grid background */
 }
 
@@ -165,11 +168,11 @@
 }
 
 .upcoming-section .recent-posts {
-    /* Remove contrasting background so it blends with schedule section */
-    background-color: transparent;
+    padding-right: var(--spacing-5);
     /* Match header padding for flush left/right alignment */
     padding-left: var(--spacing-5);
-    padding-right: var(--spacing-5);
+    /* Remove contrasting background so it blends with schedule section */
+    background-color: transparent;
 }
 
 /* Upcoming carousel: one-row horizontal scroll */
@@ -179,20 +182,20 @@
 
 .upcoming-track {
     display: grid;
-    /* Exactly 5 visible columns; additional columns maintain same width */
-    grid-template-columns: none !important;
-    grid-auto-flow: column;
-    grid-auto-columns: calc((100% - (var(--spacing-5) * 4)) / 5);
     gap: var(--spacing-5);
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: none;
-    /* prevent auto realignment */
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
     /* No extra space below the cards */
     padding-bottom: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    grid-auto-columns: calc((100% - (var(--spacing-5) * 4)) / 5);
+    grid-auto-flow: column;
+    /* Exactly 5 visible columns; additional columns maintain same width */
+    grid-template-columns: none !important;
     overflow-anchor: none;
+    -webkit-overflow-scrolling: touch;
+    /* prevent auto realignment */
+    scroll-behavior: smooth;
+    scroll-snap-type: none;
     /* avoid scroll anchoring nudges */
 }
 
@@ -240,31 +243,31 @@
 }
 
 .upcoming-nav {
+    display: flex;
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    background: var(--color-ink-dark);
-    color: var(--color-accent);
-    border: var(--border-ink-2);
-    border-radius: var(--radius-pill);
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
     width: 36px;
     height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border: var(--border-ink-2);
+    border-radius: var(--radius-pill);
+    background: var(--color-ink-dark);
+    color: var(--color-accent);
     cursor: pointer;
-    z-index: 1;
+    transform: translateY(-50%);
 }
 
 .upcoming-nav[hidden] {
     display: none !important;
 }
 
-.upcoming-nav--left {
+.upcoming-nav-left {
     left: var(--spacing-3);
 }
 
-.upcoming-nav--right {
+.upcoming-nav-right {
     right: var(--spacing-3);
 }
 
@@ -286,21 +289,21 @@
 }
 
 /* Time pill text color aligns with Now Playing time color on orange */
-.upcoming-section .upcoming-pill--time {
-    color: var(--color-bg);
+.upcoming-section .upcoming-pill-time {
     border: 2px solid var(--color-bg);
+    color: var(--color-bg);
 }
 
 /* Upcoming date pill uses blue background like Now Playing palette */
-.upcoming-section .upcoming-pill--date {
+.upcoming-section .upcoming-pill-date {
     background: var(--color-bg);
     color: var(--color-accent-2);
 }
 
 /* Upcoming tags: use site bg color for text and border on orange background */
 .upcoming-section .post-tag {
-    color: var(--color-bg);
     border-color: var(--color-bg);
+    color: var(--color-bg);
 }
 
 /* Slightly smaller tag pills in Upcoming and Latest (card contexts only) */
@@ -312,13 +315,13 @@
 
 /* Recent post tags: surface-colored text and border */
 .recent-post-content .post-tag {
-    color: var(--color-surface);
-    border-color: var(--color-surface);
     background: transparent;
+    border-color: var(--color-surface);
+    color: var(--color-surface);
 }
 
 /* Ensure upcoming tag pills keep site bg color in card content as well */
 .upcoming-section .recent-post-content .post-tag {
-    color: var(--color-bg);
     border-color: var(--color-bg);
+    color: var(--color-bg);
 }
