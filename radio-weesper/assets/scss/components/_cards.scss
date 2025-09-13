@@ -107,8 +107,14 @@
 /* Latest Shows + Archive: orange date pill */
 .recent-section .upcoming-pill--date {
     background: var(--color-accent);
-    color: var(--color-ink-dark);
-    border-color: var(--color-ink-dark);
+    color: var(--color-bg);
+    border-color: var(--color-bg);
+}
+
+/* Latest/Archive: time pill uses site bg color for text and border */
+.recent-section .upcoming-pill--time {
+    color: var(--color-bg);
+    border-color: var(--color-bg);
 }
 
 .recent-title {
@@ -122,6 +128,12 @@
 /* Ensure title links render black as well */
 .recent-title a {
     color: var(--color-ink-dark);
+}
+
+/* Latest/Archive: show titles use site background color */
+.recent-section .recent-title,
+.recent-section .recent-title a {
+    color: var(--color-bg);
 }
 
 .recent-date {
@@ -262,18 +274,40 @@
     }
 }
 
+/* Upcoming (orange bg): use site bg color for the show title */
+.upcoming-section .recent-title,
 .upcoming-section .recent-title a {
-    color: var(--color-ink-dark);
+    color: var(--color-bg);
 }
 
 .upcoming-section .recent-date,
 .upcoming-section .recent-time {
-    color: var(--color-ink-dark);
+    color: var(--color-accent-2);
 }
 
+/* Time pill text color aligns with Now Playing time color on orange */
+.upcoming-section .upcoming-pill--time {
+    color: var(--color-bg);
+    border: 2px solid var(--color-bg);
+}
+
+/* Upcoming date pill uses blue background like Now Playing palette */
+.upcoming-section .upcoming-pill--date {
+    background: var(--color-bg);
+    color: var(--color-accent-2);
+}
+
+/* Upcoming tags: use site bg color for text and border on orange background */
 .upcoming-section .post-tag {
-    color: var(--color-ink-dark);
-    border-color: var(--color-ink-dark);
+    color: var(--color-bg);
+    border-color: var(--color-bg);
+}
+
+/* Slightly smaller tag pills in Upcoming and Latest (card contexts only) */
+.upcoming-section .post-tag,
+.recent-section .post-tag {
+    padding: 1px 6px;
+    font-size: 0.8rem;
 }
 
 /* Recent post tags: surface-colored text and border */
@@ -281,4 +315,10 @@
     color: var(--color-surface);
     border-color: var(--color-surface);
     background: transparent;
+}
+
+/* Ensure upcoming tag pills keep site bg color in card content as well */
+.upcoming-section .recent-post-content .post-tag {
+    color: var(--color-bg);
+    border-color: var(--color-bg);
 }
