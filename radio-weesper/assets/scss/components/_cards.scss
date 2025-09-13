@@ -87,7 +87,7 @@
     display: inline-flex;
     padding: 4px 12px;
     border-radius: var(--radius-pill);
-    border: var(--border-ink-2);
+    border: none;
     background: var(--color-ink-dark);
     color: var(--color-accent);
     font-family: var(--font-display);
@@ -99,10 +99,15 @@
 .upcoming-pill--time {
     background: transparent;
     color: var(--color-ink-dark);
+    border: var(--border-ink-2);
 }
 
-.upcoming-section .upcoming-pill--time {
-    /* ensure time pill has visible border on orange */
+/* removed border override for time pill to keep pills borderless */
+
+/* Latest Shows + Archive: orange date pill */
+.recent-section .upcoming-pill--date {
+    background: var(--color-accent);
+    color: var(--color-ink-dark);
     border-color: var(--color-ink-dark);
 }
 
@@ -111,7 +116,12 @@
     font-family: var(--font-sans);
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--color-accent-soft);
+    color: var(--color-surface);
+}
+
+/* Ensure title links render black as well */
+.recent-title a {
+    color: var(--color-ink-dark);
 }
 
 .recent-date {
