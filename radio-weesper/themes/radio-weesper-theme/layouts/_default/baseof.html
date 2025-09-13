@@ -21,8 +21,31 @@
   <body>
     {{ partial "header.html" . }} {{ block "main" . }}{{ end }}
     <footer class="site-footer">
-      <div class="container">
-        <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo" aria-label="{{ .Site.Title }}">
+            <img src="/images/RadioWeesper_logo_circle.png" alt="{{ .Site.Title }} logo" width="64" height="64" />
+          </a>
+          <p class="footer-about">About us placeholder — short description about Radio Weesper. Replace with a concise mission or tagline.</p>
+        </div>
+        <div class="footer-cta-row">
+          <div class="footer-left" aria-hidden="true"></div>
+          <nav class="footer-up" aria-label="Back to top">
+            <a href="#top" class="footer-link">Up</a>
+          </nav>
+          <div class="footer-right">
+            <a href="/contact/" class="footer-link">Contact</a>
+            <div class="social-icons">
+              <a href="https://www.instagram.com/radioweesper/" target="_blank" rel="noopener" title="Instagram">
+                <img src="https://cdn.simpleicons.org/instagram/ec5c28" alt="Instagram" width="25" height="25" />
+              </a>
+              <a href="https://soundcloud.com/radioweesper" target="_blank" rel="noopener" title="SoundCloud">
+                <img src="https://cdn.simpleicons.org/soundcloud/ec5c28" alt="SoundCloud" width="22" height="22" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="footer-copy">&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
       </div>
     </footer>
   </body>

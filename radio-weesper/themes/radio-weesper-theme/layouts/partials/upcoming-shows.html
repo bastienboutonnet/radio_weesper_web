@@ -1,0 +1,60 @@
+{{/* Collect upcoming shows (future posts) */}}
+{{ $now := now }}
+{{ $future := where (where .Site.RegularPages "Section" "post") "Date" ">" $now }}
+{{ $future := sort $future "Date" "asc" }}
+{{ $count := len $future }}
+{{ if gt $count 0 }}
+<section class="schedule-section upcoming-section">
+  <div class="schedule-header-row">
+    <h2 class="schedule-title">Upcoming Shows</h2>
+  </div>
+  <div class="upcoming-carousel" data-upcoming-carousel>
+  <button class="upcoming-nav upcoming-nav--left" aria-label="Scroll left" data-upcoming-prev hidden>
+      &#10094;
+    </button>
+    <div class="recent-posts upcoming-track" data-upcoming-track>
+      {{/* Carousel: show more items to scroll through */}}
+      {{ range first 30 $future }}
+      {{ $showtime := .Params.showtime }}
+      {{ $title := .Title }}
+      {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
+      <article class="recent-post">
+        {{ $p := . }}
+        {{ with .Params.image }}
+        <img
+          class="recent-post-img"
+          src="{{ . | relURL }}"
+          alt="{{ $p.Title }}"
+        />
+        {{ end }}
+        <div class="recent-post-content">
+          <div class="upcoming-meta">
+            <span class="upcoming-pill upcoming-pill--date">{{ .Date.Format "Mon, 02 Jan" }}</span>
+            {{- $stime := .Params.showtime -}}
+            {{ if $stime }}
+            <span class="upcoming-pill upcoming-pill--time">{{ $stime }}</span>
+            {{ end }}
+          </div>
+          <h3 class="recent-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <div class="post-tags">
+            {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
+              >{{ . }}</span
+            >{{ end }} {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    {{ end }}
+    </div>
+    <button class="upcoming-nav upcoming-nav--right" aria-label="Scroll right" data-upcoming-next>
+      &#10095;
+    </button>
+  </div>
+  <script src="/js/upcoming-carousel.js" defer></script>
+</section>
+{{ else }}
+  {{/* Fallback to the full schedule if nothing upcoming is found */}}
+  {{ partial "schedule.html" . }}
+{{ end }}
