@@ -4,11 +4,39 @@
     justify-content: start;
     gap: var(--spacing-5);
     width: 100%;
-    margin-bottom: var(--spacing-8);
-    padding-right: 0;
-    padding-left: 0;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    box-sizing: border-box;
+    background-color: var(--color-accent-2);
+    // margin-bottom: var(--spacing-8);
+    padding-right: var(--spacing-5);
+    padding-left: var(--spacing-5);
+    /* Max 5 columns, responsive fallbacks */
+    grid-template-columns: repeat(5, minmax(250px, 1fr));
     justify-items: start;
+}
+
+/* Reduce columns at narrower widths to avoid overflow */
+@media (max-width: 1489px) {
+    .recent-posts {
+        grid-template-columns: repeat(4, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 1189px) {
+    .recent-posts {
+        grid-template-columns: repeat(3, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 889px) {
+    .recent-posts {
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 589px) {
+    .recent-posts {
+        grid-template-columns: 1fr;
+    }
 }
 
 .recent-post {
@@ -18,9 +46,10 @@
     padding: 0;
     overflow: hidden;
     border: none;
-    border-radius: var(--radius);
+    border-radius: 0;
     background: none;
     box-shadow: none;
+    padding-bottom: var(--spacing-5);
 }
 
 .recent-post img,
@@ -28,10 +57,10 @@
     display: block;
     width: 100%;
     aspect-ratio: 16/9;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-top-left-radius: var(--radius);
-    border-top-right-radius: var(--radius);
+    // border-bottom-left-radius: 0;
+    // border-bottom-right-radius: 0;
+    // border-top-left-radius: 0;
+    // border-top-right-radius: 0;
     object-fit: cover;
 }
 
@@ -41,17 +70,46 @@
     align-items: flex-start;
     box-sizing: border-box;
     width: 100%;
-    padding: var(--spacing-7) var(--spacing-6) var(--spacing-5) var(--spacing-6);
-    background-color: var(--color-card-bg);
-    box-shadow: var(--shadow-card);
-    border-bottom-left-radius: var(--radius);
-    border-bottom-right-radius: var(--radius);
+    padding: 0 var(--spacing-6) var(--spacing-5) 0;
+    // border-bottom-left-radius: 0;
+    // border-bottom-right-radius: 0;
+}
+
+/* Upcoming pills (date/time above title) */
+.upcoming-meta {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    margin-top: var(--spacing-3);
+}
+
+.upcoming-pill {
+    display: inline-flex;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    border: var(--border-ink-2);
+    background: var(--color-ink-dark);
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.upcoming-pill--time {
+    background: transparent;
+    color: var(--color-ink-dark);
+}
+
+.upcoming-section .upcoming-pill--time {
+    /* ensure time pill has visible border on orange */
+    border-color: var(--color-ink-dark);
 }
 
 .recent-title {
     margin: var(--spacing-2) 0 0;
-    font-family: var(--font-display);
-    font-size: 1rem;
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--color-accent-soft);
 }
@@ -61,5 +119,156 @@
     font-family: var(--font-sans);
     font-size: 0.95rem;
     text-align: left;
-    color: var(--color-muted);
+    color: var(--color-surface);
+}
+
+/* Recent section heading */
+.recent-heading.page-title {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 28px;
+    background-color: var(--color-accent-2);
+    padding-left: var(--spacing-5);
+    padding-right: var(--spacing-5);
+    padding-bottom: var(--spacing-3);
+    padding-top: var(--spacing-6);
+    margin: 0;
+    /* connect visually with the grid background */
+}
+
+/* Recent section container (wraps heading + grid) */
+.recent-section {
+    background-color: var(--color-accent-2);
+}
+
+.upcoming-section .recent-posts {
+    /* Remove contrasting background so it blends with schedule section */
+    background-color: transparent;
+    /* Match header padding for flush left/right alignment */
+    padding-left: var(--spacing-5);
+    padding-right: var(--spacing-5);
+}
+
+/* Upcoming carousel: one-row horizontal scroll */
+.upcoming-carousel {
+    position: relative;
+}
+
+.upcoming-track {
+    display: grid;
+    /* Exactly 5 visible columns; additional columns maintain same width */
+    grid-template-columns: none !important;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100% - (var(--spacing-5) * 4)) / 5);
+    gap: var(--spacing-5);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: none;
+    /* prevent auto realignment */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* No extra space below the cards */
+    padding-bottom: 0;
+    overflow-anchor: none;
+    /* avoid scroll anchoring nudges */
+}
+
+.upcoming-section .recent-post {
+    /* Remove extra per-card bottom padding in upcoming section */
+    padding-bottom: 0;
+}
+
+.upcoming-track .recent-post {
+    min-width: 0;
+}
+
+/* Match static grid breakpoints for visible columns */
+@media (max-width: 1489px) {
+    .upcoming-track {
+        grid-auto-columns: calc((100% - (var(--spacing-5) * 3)) / 4);
+    }
+}
+
+@media (max-width: 1189px) {
+    .upcoming-track {
+        grid-auto-columns: calc((100% - (var(--spacing-5) * 2)) / 3);
+    }
+}
+
+@media (max-width: 889px) {
+    .upcoming-track {
+        grid-auto-columns: calc((100% - (var(--spacing-5) * 1)) / 2);
+    }
+}
+
+@media (max-width: 589px) {
+    .upcoming-track {
+        grid-auto-columns: 100%;
+    }
+}
+
+/* Utilities toggled by JS during initial reset */
+.upcoming-track.no-smooth {
+    scroll-behavior: auto !important;
+}
+
+.upcoming-track.no-snap {
+    scroll-snap-type: none !important;
+}
+
+.upcoming-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-ink-dark);
+    color: var(--color-accent);
+    border: var(--border-ink-2);
+    border-radius: var(--radius-pill);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.upcoming-nav[hidden] {
+    display: none !important;
+}
+
+.upcoming-nav--left {
+    left: var(--spacing-3);
+}
+
+.upcoming-nav--right {
+    right: var(--spacing-3);
+}
+
+@media (hover: hover) {
+    .upcoming-nav:hover {
+        filter: brightness(1.1);
+    }
+}
+
+.upcoming-section .recent-title a {
+    color: var(--color-ink-dark);
+}
+
+.upcoming-section .recent-date,
+.upcoming-section .recent-time {
+    color: var(--color-ink-dark);
+}
+
+.upcoming-section .post-tag {
+    color: var(--color-ink-dark);
+    border-color: var(--color-ink-dark);
+}
+
+/* Recent post tags: surface-colored text and border */
+.recent-post-content .post-tag {
+    color: var(--color-surface);
+    border-color: var(--color-surface);
+    background: transparent;
 }
