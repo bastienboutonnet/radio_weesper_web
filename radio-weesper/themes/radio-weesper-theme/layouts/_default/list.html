@@ -28,11 +28,6 @@
               >{{ . }}</span
             >{{ end }} {{ end }}
           </div>
-          {{ if .Params.description }}
-          <p class="show-description">{{ .Params.description }}</p>
-          {{ else }}
-          <p class="show-description">{{ .Summary }}</p>
-          {{ end }}
         </div>
       </article>
       {{ end }}

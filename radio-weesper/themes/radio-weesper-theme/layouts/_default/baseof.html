@@ -7,7 +7,11 @@
       {{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title
       }} | {{ .Site.Title }}{{ end }}{{ end }}
     </title>
-    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}"> <link
+  {{ $opts := dict "targetPath" "css/style.css" "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")}}
+  {{ $scss := resources.Get "scss/main.scss" | css.Sass $opts }}
+  <link rel="stylesheet" href="{{ $scss.RelPermalink }}">
+  <!-- Fallback during dev: {{ "css/style.css" | relURL }} -->
+  <link
     rel="stylesheet" href="{{ "css/fonts.css" | relURL }}"> {{ partial
     "favicon.html" . }}
     <link

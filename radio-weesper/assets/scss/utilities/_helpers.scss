@@ -1,0 +1,51 @@
+/* Utilities */
+.flex-center {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.circle-indicator {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    margin: 0 var(--spacing-1) 0 2px;
+    border-radius: 50%;
+    background: var(--color-live);
+    box-shadow: 0 0 6px var(--color-live);
+}
+
+.square-indicator {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    margin: 0 var(--spacing-1) 0 2px;
+    border-radius: 2px;
+    background: var(--color-muted-3);
+    box-shadow: none;
+}
+
+.square-indicator.offline {
+    background: var(--color-muted-3);
+    opacity: 0.7;
+}
+
+.social-icons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4-5);
+}
+
+/* Blue glow for header logo */
+.site-header .logo img {
+    width: 48px;
+    max-width: 48px;
+    height: 48px;
+    max-height: 48px;
+    border-radius: 20%;
+    filter: drop-shadow(0 0 8px rgba(164, 194, 224, 0.7)) drop-shadow(0 0 10px rgba(164, 194, 224, 0.5));
+}
