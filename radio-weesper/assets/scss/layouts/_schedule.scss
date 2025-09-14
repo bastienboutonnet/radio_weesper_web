@@ -3,20 +3,23 @@
     box-sizing: border-box;
     width: 100vw;
     max-width: 100vw;
-
-    // margin-top: var(--spacing-2-5);
+    /* Control how much extra vertical space the schedule occupies */
+    --schedule-bottom-space: var(--spacing-big);
     padding: var(--spacing-1) 0 0 0;
     border-bottom: 2px solid var(--color-ink-dark);
     background: var(--color-accent);
     color: var(--color-ink-dark);
 }
 
+/* Optional wrapper in markup; no special layout constraints needed */
+.schedule-grid-wrap {
+    position: relative;
+}
+
 .schedule-header-row {
     display: flex;
     align-items: center;
     gap: var(--spacing-2-5);
-
-    // margin-bottom: 0px;
     margin-top: var(--spacing-6);
     margin-left: var(--spacing-2-5);
     font-size: 28px;
@@ -53,6 +56,8 @@
     background: none;
     box-shadow: none;
     grid-template-columns: repeat(4, 1fr);
+    align-items: stretch;
+    /* No bottom padding here; columns provide their own so borders reach bottom */
 
     @media (max-width: 1200px) {
         grid-template-columns: repeat(2, 1fr);
@@ -67,10 +72,18 @@
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: 0 0 var(--spacing-6) 0;
+    /* Bottom padding makes columns (and their right borders) extend */
+    padding: 0 0 var(--schedule-bottom-space) 0;
     border-top: none;
     border-right: var(--border-ink-2);
     background: var(--color-accent);
+}
+
+/* Optional: tweak bottom space on small screens */
+@media (max-width: 700px) {
+    .schedule-section {
+        --schedule-bottom-space: var(--spacing-5);
+    }
 }
 
 .schedule-day-column:last-child {

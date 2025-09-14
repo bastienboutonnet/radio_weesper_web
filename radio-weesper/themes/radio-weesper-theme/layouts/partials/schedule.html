@@ -16,6 +16,7 @@
       {{ $days = $days | append $day }}
     {{ end }}
   {{ end }}
+  <div class="schedule-grid-wrap">
   <div class="schedule-grid">
     {{ $daysCount := len $days }}
     {{ range $i, $v := $days }}
@@ -58,5 +59,6 @@
         </ul>
       </div>
     {{ end }}
+  </div>
   </div>
 </section>
