@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Radio Weesper</title>
+    <link>http://192.168.0.187:1313/tags/</link>
+    <description>Recent content in Tags on Radio Weesper</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 30 Oct 2025 21:00:00 +0200</lastBuildDate>
+    <atom:link href="http://192.168.0.187:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Funk</title>
+      <link>http://192.168.0.187:1313/tags/funk/</link>
+      <pubDate>Wed, 10 Sep 2025 19:00:00 +0200</pubDate>
+      <guid>http://192.168.0.187:1313/tags/funk/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>House</title>
+      <link>http://192.168.0.187:1313/tags/house/</link>
+      <pubDate>Wed, 10 Sep 2025 19:00:00 +0200</pubDate>
+      <guid>http://192.168.0.187:1313/tags/house/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ambient</title>
+      <link>http://192.168.0.187:1313/tags/ambient/</link>
+      <pubDate>Mon, 01 Sep 2025 19:00:00 +0200</pubDate>
+      <guid>http://192.168.0.187:1313/tags/ambient/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Dub</title>
+      <link>http://192.168.0.187:1313/tags/dub/</link>
+      <pubDate>Mon, 01 Sep 2025 19:00:00 +0200</pubDate>
+      <guid>http://192.168.0.187:1313/tags/dub/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

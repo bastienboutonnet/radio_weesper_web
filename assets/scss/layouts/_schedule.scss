@@ -1,0 +1,185 @@
+/* Schedule */
+.schedule-section {
+    box-sizing: border-box;
+    width: 100vw;
+    max-width: 100vw;
+    /* Control how much extra vertical space the schedule occupies */
+    --schedule-bottom-space: var(--spacing-big);
+
+    padding: var(--spacing-1) 0 0 0;
+    border-bottom: 2px solid var(--color-ink-dark);
+    background: var(--color-accent);
+    color: var(--color-ink-dark);
+}
+
+/* Optional wrapper in markup; no special layout constraints needed */
+.schedule-grid-wrap {
+    position: relative;
+}
+
+.schedule-header-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2-5);
+    margin-top: var(--spacing-6);
+    margin-left: var(--spacing-2-5);
+    font-size: 28px;
+}
+
+.schedule-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-bg);
+}
+
+.schedule-timezone {
+    margin-bottom: var(--spacing-5);
+    margin-left: var(--spacing-2-5);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 400;
+    opacity: 0.8;
+    color: var(--color-bg);
+}
+
+.schedule-grid {
+    display: grid;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    overflow: visible;
+    border-top: var(--border-ink-2);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    grid-template-columns: repeat(4, 1fr);
+    /* No bottom padding here; columns provide their own so borders reach bottom */
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.schedule-day-column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    /* Bottom padding makes columns (and their right borders) extend */
+    padding: 0 0 var(--schedule-bottom-space) 0;
+    border-top: none;
+    border-right: var(--border-ink-2);
+    background: var(--color-accent);
+}
+
+/* Optional: tweak bottom space on small screens */
+@media (max-width: 700px) {
+    .schedule-section {
+        --schedule-bottom-space: var(--spacing-5);
+    }
+}
+
+.schedule-day-column:last-child {
+    border-right: none;
+}
+
+.schedule-day-pill {
+    display: inline-flex;
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    margin: var(--spacing-7) var(--spacing-2-5) var(--spacing-2-5) var(--spacing-2-5);
+    padding: var(--spacing-1) var(--spacing-4);
+    border: 2px solid var(--color-bg);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(33, 33, 33, 0.08);
+    align-self: flex-start;
+    color: var(--color-accent-2);
+}
+
+.schedule-shows {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    margin: 0 18px;
+    padding: 0;
+    list-style: none;
+}
+
+.schedule-show {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 6px 0;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    transition: background 0.2s;
+}
+
+.schedule-show.live {
+    background: var(--color-ink-dark);
+    font-weight: 700;
+    color: var(--color-live-alt);
+}
+
+.schedule-show-time {
+    min-width: 54px;
+    margin-right: var(--spacing-3);
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: var(--color-bg);
+}
+
+.schedule-show.live .schedule-show-time {
+    color: var(--color-live-alt);
+}
+
+.schedule-show-title {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    white-space: pre-line;
+    color: var(--color-bg);
+}
+
+/* Upcoming Shows header: mirror Latest Shows heading scale/spacing */
+.upcoming-section {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    /* Black bottom border under the entire upcoming block */
+    border-bottom: 2px solid var(--color-ink-dark);
+
+    .schedule-header-row {
+        /* Reset default margin-left and add symmetric horizontal padding */
+        margin-left: 0;
+        padding-right: var(--spacing-5);
+        /* Add vertical rhythm similar to .recent-heading */
+        // padding-top: var(--spacing-6);
+        padding-bottom: var(--spacing-3);
+        padding-left: var(--spacing-5);
+    }
+
+    .schedule-title {
+        /* Match Latest Shows visual weight/size */
+        font-size: 1.75rem;
+        /* ~28px */
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        color: var(--color-bg);
+    }
+}

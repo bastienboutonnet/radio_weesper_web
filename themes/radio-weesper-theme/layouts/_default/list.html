@@ -1,0 +1,40 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }} {{ define "main"
+}}
+<main class="archive-page container">
+  {{ partial "live-banner.html" . }}
+  <section class="recent-section container">
+    <!-- <h1>{{ .Title }}</h1> -->
+    <h2 class="recent-heading page-title">All Shows</h2>
+    <div class="recent-posts">
+      {{ range (where .Site.RegularPages "Section" "post") }}
+      <article class="recent-post">
+        {{ with .Params.image }}
+        <img
+          class="recent-post-img"
+          src="{{ . | relURL }}"
+          alt="{{ $.Title }}"
+        />
+        {{ end }}
+        <div class="recent-post-content">
+          <div class="upcoming-meta">
+            <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan" }}</span>
+            {{- $stime := .Params.showtime -}}
+            {{ if $stime }}
+            <span class="upcoming-pill upcoming-pill-time">{{ $stime }}</span>
+            {{ end }}
+          </div>
+          <h3 class="recent-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <div class="post-tags">
+            {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
+              >{{ . }}</span
+            >{{ end }} {{ end }}
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+</main>
+{{ end }}

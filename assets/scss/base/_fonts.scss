@@ -1,0 +1,26 @@
+/* Web fonts (part of SCSS pipeline) */
+/* External families (optional): */
+@import 'https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;500&display=swap';
+
+/* Self-hosted variable font: Satoshi */
+@font-face {
+    font-family: 'Satoshi';
+    font-weight: 300 900;
+    font-style: normal;
+    font-display: swap;
+    /* Use path relative to /css/style.css so it works under subpaths */
+    src: url('../fonts/Satoshi-Variable.woff2') format('woff2'),
+        url('../fonts/Satoshi-Variable.woff') format('woff');
+}
+
+/* Self-hosted static font: Phonk Regular */
+@font-face {
+    font-family: 'Phonk Regular';
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    /* Use path relative to /css/style.css so it works under subpaths */
+    src: url('../fonts/Phonk-Regular.woff2') format('woff2'),
+        url('../fonts/Phonk-Regular.woff') format('woff');
+}

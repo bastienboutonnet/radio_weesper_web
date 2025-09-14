@@ -1,0 +1,47 @@
+<header class="site-header">
+  <div class="container" style="display: flex; align-items: center; justify-content: space-between">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <div class="logo">
+        <a href="/">
+          <img
+            src="/images/RadioWeesper_logo_circle.png"
+            alt="Radio Weesper Logo"
+            style="height: 60px; width: 60px; object-fit: contain; vertical-align: middle; margin-right: 0;"
+          />
+        </a>
+      </div>
+      <!-- Hamburger button for mobile -->
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" onclick="toggleMenu()">
+        <span class="bar bar1"></span>
+        <span class="bar bar2"></span>
+        <span class="bar bar3"></span>
+      </button>
+      <nav class="main-nav" id="main-nav" style="display: flex; align-items: center">
+        <ul class="main-nav-list" style="justify-content: flex-start; align-items: center">
+          {{ range .Site.Menus.main }}
+          <li style="display: flex; align-items: center">
+            <a href="{{ .URL }}" class="main-nav-link">{{ .Name }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </nav>
+    </div>
+  <div class="social-icons">
+      <a href="https://www.instagram.com/radioweesper/" target="_blank" rel="noopener" title="Instagram">
+        <img src="https://cdn.simpleicons.org/instagram/ec5c28" alt="Instagram" width="25" height="25" />
+      </a>
+      <a href="https://soundcloud.com/radioweesper" target="_blank" rel="noopener" title="SoundCloud">
+        <img src="https://cdn.simpleicons.org/soundcloud/ec5c28" alt="SoundCloud" width="22" height="22" />
+      </a>
+    </div>
+  </div>
+  <script>
+    function toggleMenu() {
+      var nav = document.getElementById('main-nav');
+      var btn = document.querySelector('.hamburger');
+      nav.classList.toggle('open');
+      btn.classList.toggle('open');
+      btn.setAttribute('aria-expanded', nav.classList.contains('open'));
+    }
+  </script>
+</header>
