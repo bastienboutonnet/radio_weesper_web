@@ -644,6 +644,7 @@ a {
 
 .schedule-grid {
   display: grid;
+  align-items: stretch;
   gap: 0;
   width: 100%;
   max-width: 1800px;
@@ -654,7 +655,6 @@ a {
   background: none;
   box-shadow: none;
   grid-template-columns: repeat(4, 1fr);
-  align-items: stretch;
   /* No bottom padding here; columns provide their own so borders reach bottom */
 }
 
