@@ -183,3 +183,18 @@
         color: var(--color-bg);
     }
 }
+
+/* When days stack on mobile, use horizontal separators between them */
+@media (max-width: 700px) {
+    .schedule-day-column {
+        /* Remove desktop-style vertical separator */
+        border-right: none;
+        /* Add a top border to create a separator between stacked days */
+        border-top: var(--border-ink-2);
+    }
+
+    .schedule-day-column:first-child {
+        /* Avoid double border at the very top of the list; grid already has a top border */
+        border-top: none;
+    }
+}
