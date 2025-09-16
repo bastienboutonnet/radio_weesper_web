@@ -22,7 +22,7 @@
       {{ $showName := .Params.show_name }}
       {{ $title := (or $showName .Title) }}
       {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
-      <h3 class="show-title">{{ $displayTitle }}</h3>
+  <h3 class="show-title"><a class="show-title-link" href="{{ .RelPermalink }}" aria-label="Open {{ $displayTitle }}">{{ $displayTitle }}</a></h3>
       {{ if $isResident }}
         <p class="now-playing-artists">with {{ $artistsStr }}</p>
       {{ else }}

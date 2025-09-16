@@ -95,6 +95,13 @@
     color: var(--color-accent-soft);
 }
 
+/* Ensure linked artist names match artists text styling */
+.single-hero .single-artists a {
+    color: var(--color-accent-soft);
+    font-weight: inherit;
+    text-decoration: none;
+}
+
 /* Single view: Date pill on black bg with blue text */
 .single-hero .upcoming-meta .upcoming-pill-date {
     background: var(--color-bg);

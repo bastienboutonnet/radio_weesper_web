@@ -587,6 +587,18 @@ a {
   color: var(--color-accent-2);
 }
 
+/* Keep linked titles blue, not the default orange link color */
+.show-title a {
+  font-family: inherit;
+  font-weight: inherit;
+  color: var(--color-accent-2);
+  text-decoration: none;
+}
+
+.show-title a:hover {
+  color: var(--color-accent-2);
+}
+
 .now-playing-artists {
   margin: var(--spacing-1) 0 var(--spacing-2) 0;
   width: 100%;
@@ -719,6 +731,13 @@ a {
   margin-top: var(--spacing-1);
   font-weight: 500;
   color: var(--color-accent-soft);
+}
+
+/* Ensure linked artist names match artists text styling */
+.single-hero .single-artists a {
+  color: var(--color-accent-soft);
+  font-weight: inherit;
+  text-decoration: none;
 }
 
 /* Single view: Date pill on black bg with blue text */
