@@ -4,7 +4,8 @@
     <section class="single-hero">
       <aside class="single-hero-info">
         <div class="now-playing-info">
-          <h1 class="show-title">{{ .Title }}</h1>
+          {{ $showName := or .Params.show_name .Title }}
+          <h1 class="show-title">{{ $showName }}</h1>
           <div class="upcoming-meta">
             <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan 2006" }}</span>
             {{ if or .Params.showtime .Params.showendtime }}
@@ -31,7 +32,7 @@
       </aside>
       {{ with .Params.image }}
       <div class="single-hero-image">
-        <img src="{{ . | relURL }}" alt="{{ $.Title }}" />
+        <img src="{{ . | relURL }}" alt="{{ (or $.Params.show_name $.Title) }}" />
       </div>
       {{ end }}
     </section>

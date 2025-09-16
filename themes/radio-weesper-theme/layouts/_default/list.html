@@ -1,4 +1,4 @@
-{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }} {{ define "main"
+{{ define "title" }}{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }} | {{ .Site.Title }}{{ end }} {{ define "main"
 }}
 <main class="archive-page container">
   {{ partial "live-banner.html" . }}
@@ -7,26 +7,27 @@
     <h2 class="recent-heading page-title">All Shows</h2>
     <div class="recent-posts">
       {{ range (where .Site.RegularPages "Section" "post") }}
+      {{ $p := . }}
       <article class="recent-post">
         {{ with .Params.image }}
         <img
           class="recent-post-img"
           src="{{ . | relURL }}"
-          alt="{{ $.Title }}"
+          alt="{{ with $p.Params.show_name }}{{ . }}{{ else }}{{ $p.Title }}{{ end }}"
         />
         {{ end }}
         <div class="recent-post-content">
           <div class="upcoming-meta">
             <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan" }}</span>
           </div>
-          <h3 class="recent-title">{{ .Title }}</h3>
+          <h3 class="recent-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
           <div class="post-tags">
             {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
               >{{ . }}</span
             >{{ end }} {{ end }}
           </div>
         </div>
-        <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ .Title }}"></a>
+        <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}"></a>
       </article>
       {{ end }}
     </div>

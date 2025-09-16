@@ -5,7 +5,7 @@
   {{ with index (first 1 (where .Site.RegularPages "Section" "post")) 0 }}
   <aside class="now-playing">
     <div class="now-playing-info">
-      <h3 class="show-title">{{ .Title }}</h3>
+      <h3 class="show-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
       {{ if and .Params.showtime .Params.showendtime }}
       <p class="show-time">
         {{ .Params.showtime }} - {{ .Params.showendtime }}

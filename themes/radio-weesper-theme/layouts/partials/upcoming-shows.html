@@ -16,7 +16,7 @@
       {{/* Carousel: show more items to scroll through */}}
       {{ range first 30 $future }}
       {{ $showtime := .Params.showtime }}
-      {{ $title := .Title }}
+      {{ $title := (or .Params.show_name .Title) }}
       {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
       <article class="recent-post">
         {{ $p := . }}
@@ -24,7 +24,7 @@
         <img
           class="recent-post-img"
           src="{{ . | relURL }}"
-          alt="{{ $p.Title }}"
+          alt="{{ with $p.Params.show_name }}{{ . }}{{ else }}{{ $p.Title }}{{ end }}"
         />
         {{ end }}
         <div class="recent-post-content">
@@ -35,14 +35,14 @@
               <span class="upcoming-pill upcoming-pill-time">{{ $stime }}</span>
             {{ end }}
           </div>
-          <h3 class="recent-title">{{ .Title }}</h3>
+          <h3 class="recent-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
           <div class="post-tags">
             {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
               >{{ . }}</span
             >{{ end }} {{ end }}
           </div>
         </div>
-        <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ .Title }}"></a>
+        <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}"></a>
       </article>
       {{ end }}
     {{ end }}

@@ -14,7 +14,7 @@
             {{ with index (first 1 (where .Site.RegularPages "Section" "post"))
             0 }}
             <span class="marquee-span" id="live-marquee-title">
-              {{ .Title }}
+              {{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}
             </span>
             {{ else }}
             <span class="marquee-span-static">

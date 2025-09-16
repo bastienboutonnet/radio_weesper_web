@@ -1,5 +1,6 @@
 ---
 title: "Crisp Sando"
+show_name: "Crisp Sando"
 date: 2025-10-30T21:00:00+02:00
 showtime: "19:00"
 showendtime: "20:00"

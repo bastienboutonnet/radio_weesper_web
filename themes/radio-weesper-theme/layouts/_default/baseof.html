@@ -4,8 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      {{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title
-      }} | {{ .Site.Title }}{{ end }}{{ end }}
+      {{ block "title" . }}
+        {{ if .IsHome }}
+          {{ .Site.Title }}
+        {{ else }}
+          {{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }} | {{ .Site.Title }}
+        {{ end }}
+      {{ end }}
     </title>
   {{ $opts := dict "targetPath" "css/style.css" "outputStyle" (cond hugo.IsDevelopment "expanded" "compressed")}}
   {{ $scss := resources.Get "scss/main.scss" | css.Sass $opts }}

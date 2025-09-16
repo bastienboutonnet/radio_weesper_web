@@ -1,5 +1,6 @@
 ---
 title: "Mor.lov4"
+show_name: "Mor.lov4"
 date: 2025-09-25T20:00:00+02:00
 showtime: "20:00"
 showendtime: "21:00"
