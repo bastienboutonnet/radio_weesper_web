@@ -10,37 +10,7 @@
     {{/* Full alphabet (A–Z) plus '#' bucket */}}
     {{ $alphabet := slice "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "#" }}
 
-    {{ if hugo.IsDevelopment }}
-    <details style="margin: 8px 0 12px; padding: 8px 12px; background: rgba(0,0,0,.08);">
-      <summary>Artist A–Z debug (dev only)</summary>
-      <div style="font-family: monospace; font-size: 12px; line-height: 1.5;">
-        <div>Counts:
-          {{ range $alphabet }}
-            {{ $c := $.Scratch.Get (printf "letter-%s" .) }}
-            <span>[{{ . }}: {{ cond $c $c 0 }}]</span>
-          {{ end }}
-        </div>
-        <ul>
-        {{ range $sorted }}
-          {{ $nameForIndex := or .Params.artist_name (or .Title .File.BaseFileName) }}
-          {{ $raw := trim $nameForIndex " \t\r\n" }}
-          {{ $norm := replaceRE `^[^A-Za-z]+` "" $raw }}
-          {{ $slug := anchorize $raw }}
-          {{ $first := "#" }}
-          {{ if ne $norm "" }}{{ $first = upper (substr $norm 0 1) }}{{ end }}
-          {{ $firstRaw := "#" }}
-          {{ if ne $raw "" }}{{ $firstRaw = upper (substr $raw 0 1) }}{{ end }}
-          {{ $firstSlug := "#" }}
-          {{ if ne $slug "" }}{{ $firstSlug = upper (substr $slug 0 1) }}{{ end }}
-          <li>
-            name={{ printf "%q" $nameForIndex }} | raw={{ printf "%q" $raw }} | norm={{ printf "%q" $norm }} | slug={{ printf "%q" $slug }}
-            → first(norm)={{ $first }}, first(raw)={{ $firstRaw }}, first(slug)={{ $firstSlug }}
-          </li>
-        {{ end }}
-        </ul>
-      </div>
-    </details>
-    {{ end }}
+    
 
     {{/* Count artists per letter using Scratch to avoid scope issues */}}
     {{ range $sorted }}
@@ -54,7 +24,8 @@
       {{ $.Scratch.Add (printf "letter-%s" $first) 1 }}
     {{ end }}
 
-    <nav class="alpha-index" aria-label="Alphabetical index" style="margin-bottom: 1rem;">
+  <div id="alpha-sentinel" aria-hidden="true"></div>
+  <nav class="alpha-index" aria-label="Alphabetical index" style="left: 0; right: 0; width: 100%; background: var(--color-accent-2); border-bottom: 1px solid var(--color-accent-soft); margin-bottom: 1rem;">
       <ul class="alpha-index-list" style="display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding-left: 0;">
         {{ range $alphabet }}
           {{ $count := $.Scratch.Get (printf "letter-%s" .) }}
@@ -68,12 +39,14 @@
           </li>
         {{ end }}
       </ul>
-    </nav>
+  </nav>
 
-    {{ range $alphabet }}
+  <div id="alpha-spacer" style="height: 0;"></div>
+
+  {{ range $alphabet }}
       {{ $count := $.Scratch.Get (printf "letter-%s" .) }}
       {{ if and $count (gt $count 0) }}
-      <h3 id="{{ . }}" class="alpha-heading" style="margin: 1.25rem 0 .5rem;">{{ . }}</h3>
+  <h3 id="{{ . }}" class="alpha-heading" style="margin: 1.25rem 0 .5rem; scroll-margin-top: 3.75rem;">{{ . }}</h3>
       <div class="recent-posts">
         {{ $letter := . }}
         {{ range $sorted }}
@@ -106,6 +79,47 @@
       </div>
       {{ end }}
     {{ end }}
+
+    <script>
+      (function(){
+        const bar = document.querySelector('.alpha-index');
+        const spacer = document.getElementById('alpha-spacer');
+        const sentinel = document.getElementById('alpha-sentinel');
+        if (!bar || !spacer || !sentinel) return;
+
+        function barHeight(){
+          const h = bar.getBoundingClientRect().height;
+          return h > 0 ? h : 60;
+        }
+
+        const fix = () => {
+          bar.style.position = 'fixed';
+          bar.style.top = '0px';
+          bar.style.zIndex = '1002';
+          spacer.style.height = barHeight() + 'px';
+        };
+        const unfix = () => {
+          bar.style.position = '';
+          bar.style.top = '';
+          bar.style.zIndex = '';
+          spacer.style.height = '0px';
+        };
+
+        const io = new IntersectionObserver(([e]) => {
+          if (!e) return;
+          if (e.isIntersecting) {
+            unfix();
+          } else {
+            fix();
+          }
+        }, {rootMargin: '0px 0px 0px 0px', threshold: 0});
+        io.observe(sentinel);
+
+        window.addEventListener('resize', () => {
+          if (bar.style.position === 'fixed') spacer.style.height = barHeight() + 'px';
+        });
+      })();
+    </script>
   </section>
 </main>
 {{ end }}

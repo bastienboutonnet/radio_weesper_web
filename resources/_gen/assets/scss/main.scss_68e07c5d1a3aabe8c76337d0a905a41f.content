@@ -973,11 +973,20 @@ a {
 }
 
 .alpha-index {
+  position: -webkit-sticky;
+  /* Safari */
   position: sticky;
-  top: calc(var(--header-height) + var(--spacing-3));
-  z-index: 2;
-  padding: var(--spacing-2) var(--spacing-5) var(--spacing-2) var(--spacing-5);
+  /* Stick to the top of the viewport; header scrolls away above it */
+  top: 0;
+  z-index: 1002;
+  left: 0;
+  width: 100%;
+  padding: 0 var(--spacing-5) 0 var(--spacing-4);
   background: var(--color-accent-2);
+  /* Visual separation when content scrolls underneath */
+  border-bottom: 1px solid var(--color-accent-soft);
+  /* Expose an approximate height var for anchor offset consumers */
+  --alpha-index-height: 3.5rem;
 }
 
 .alpha-index-list {
@@ -989,10 +998,19 @@ a {
 }
 
 .alpha-heading {
-  margin: var(--spacing-6) 0 var(--spacing-3);
+  margin: var(--spacing-3) 0 var(--spacing-2);
   padding: 0 var(--spacing-5);
   font-family: var(--font-display);
   color: var(--color-bg);
+  border-top: 2px solid var(--color-ink-dark);
+  /* Ensure in-page anchor jumps don't get hidden under the sticky alphabet */
+  scroll-margin-top: calc(var(--alpha-index-height, 3.5rem) + var(--spacing-3));
+}
+
+/* Safety: make sure ancestors don't clip sticky positioning */
+main.archive-page.container,
+.recent-section.container {
+  overflow: visible;
 }
 
 .alpha-index .post-tag[aria-disabled="true"],
@@ -1000,6 +1018,35 @@ a {
   opacity: .35;
   cursor: default;
   pointer-events: none;
+}
+
+.alpha-index .post-tag {
+  border-radius: 0;
+  /* no pill */
+  border: none;
+  background: transparent;
+  /* just letters */
+  padding: 0;
+  /* remove chip padding */
+  color: var(--color-bg);
+  /* strong contrast on light blue bar */
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 3rem;
+  /* large-ish for visibility */
+  line-height: 1.1;
+}
+
+.alpha-index a.post-tag:hover,
+.alpha-index a.post-tag:focus-visible {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Ensure letter size wins over component tag styles in recent-section */
+.recent-section .alpha-index .post-tag {
+  font-size: 1.5rem;
+  line-height: 1.1;
 }
 
 /* Footer */
