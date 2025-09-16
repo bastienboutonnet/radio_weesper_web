@@ -12,6 +12,7 @@
     box-sizing: border-box;
     width: 100vw !important;
     max-width: 100vw !important;
+
     /* Full-bleed: no inner padding so content touches viewport edges */
     padding: 0;
 
@@ -24,6 +25,7 @@
 
     @media (max-width: 700px) {
         flex-direction: column;
+
         /* Keep full-bleed on mobile as well */
         padding: 0;
 
@@ -38,13 +40,16 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: stretch;
+
     /* Separator will be drawn via player border, so remove column gap */
     gap: 0;
     box-sizing: border-box;
     width: 100vw;
     max-width: 100vw;
     margin: 0;
+
     /* Height applied conditionally below to avoid affecting schedule-full-width */
+
     /* Flush with banner and viewport edges */
     padding: 0;
 
@@ -54,6 +59,7 @@
         width: 100%;
         max-width: 100%;
         height: auto !important;
+
         /* Remove inner padding on mobile for true full-width */
         padding: 0;
     }
@@ -70,6 +76,7 @@
     display: block;
     height: auto !important;
     min-height: 0;
+
     /* Keep full-bleed; spacing handled inside child components if needed */
     padding: 0;
 }
@@ -82,6 +89,7 @@
     min-width: 0;
     margin-right: 0;
     border: none;
+
     /* Separator handled on now-playing side */
     // border-right: none;
     border-bottom: var(--border-ink-2);
@@ -98,6 +106,7 @@
         margin-right: 0;
         padding-right: 0;
         padding-left: 0;
+
         /* On stacked layout, remove vertical separator */
         border-right: none;
         border-radius: 0;
@@ -113,9 +122,11 @@
     min-width: 0;
     max-width: 100%;
     height: auto;
+
     /* Add left padding to breathe after separator */
     padding: var(--spacing-2) var(--spacing-4) var(--spacing-2) var(--spacing-4);
     border-bottom: var(--border-ink-2);
+
     /* Vertical separator on the left, next to the player */
     border-left: var(--border-ink-2);
 
@@ -132,11 +143,10 @@
         width: 100% !important;
         min-width: 0 !important;
         max-width: 100% !important;
+
         /* Provide comfortable inner spacing on mobile while keeping full-bleed section */
-        padding-top: var(--spacing-3);
-        padding-right: var(--spacing-3);
-        padding-left: var(--spacing-3);
-        padding-bottom: var(--spacing-5);
+        padding: var(--spacing-3) var(--spacing-3) var(--spacing-5) var(--spacing-3);
+
         /* Add a horizontal separator between stacked sections */
         border-top: var(--border-ink-2);
         border-left: none;
@@ -200,7 +210,7 @@
 }
 
 .show-time {
-    margin: 0 0 7px 0;
+    margin: 0 0 7px;
     font-size: 1rem;
     text-align: left;
     color: var(--color-accent-2);

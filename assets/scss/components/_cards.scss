@@ -9,7 +9,8 @@
     // margin-bottom: var(--spacing-8);
     padding-right: var(--spacing-5);
     padding-left: var(--spacing-5);
-    background-color: var(--color-accent-2);
+    background-color: var(--color-bg);
+
     /* Max 5 columns, responsive fallbacks */
     grid-template-columns: repeat(5, minmax(250px, 1fr));
     justify-items: start;
@@ -42,10 +43,17 @@
 
 .recent-post {
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    /* Ensure enough vertical space so tags can anchor to bottom */
+    min-height: var(--card-min-height);
     width: 100%;
     margin: 0;
     padding: 0;
-    padding-bottom: var(--spacing-5);
+
+    /* Rely on inner content padding instead of outer bottom padding */
+    padding-bottom: 0;
     overflow: hidden;
     border: none;
     border-radius: 0;
@@ -69,10 +77,13 @@
 .recent-post-content {
     display: flex;
     flex-direction: column;
+    flex: 1 1 auto;
     align-items: flex-start;
     box-sizing: border-box;
     width: 100%;
-    padding: 0 var(--spacing-6) var(--spacing-5) 0;
+
+    /* Tighten bottom padding (was spacing-6) to reduce overall perceived empty space */
+    padding: 0 var(--spacing-6) var(--spacing-4) 0;
 
     // border-bottom-left-radius: 0;
     // border-bottom-right-radius: 0;
@@ -84,6 +95,24 @@
     align-items: center;
     gap: var(--spacing-2);
     margin-top: var(--spacing-3);
+}
+
+/* Upcoming: use title top margin for space (match Latest approach) */
+.upcoming-section .recent-post-content {
+    row-gap: 0;
+}
+
+
+/* Match Latest: title provides the gap below the pills */
+.upcoming-section .recent-title {
+    margin-top: var(--spacing-2);
+}
+
+/* Place the spacing under the pills (not above the title) */
+
+/* No extra margin under pills in Upcoming; rely on title margin like Latest */
+.upcoming-section .upcoming-meta {
+    margin-bottom: 0;
 }
 
 .upcoming-pill {
@@ -108,10 +137,12 @@
 /* removed border override for time pill to keep pills borderless */
 
 /* Latest Shows + Archive: orange date pill */
+
+/* Latest/Archive (dark bg): use accent-2 for date pill */
 .recent-section .upcoming-pill-date {
-    background: var(--color-accent);
-    border-color: var(--color-bg);
-    color: var(--color-bg);
+    background: transparent;
+    border: 1.5px solid var(--color-accent-2);
+    color: var(--color-accent-2);
 }
 
 /* Latest/Archive: time pill uses site bg color for text and border */
@@ -122,21 +153,23 @@
 
 .recent-title {
     margin: var(--spacing-2) 0 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--color-surface);
 }
 
 /* Ensure title links render black as well */
 .recent-title a {
+    font-family: inherit;
+    font-weight: inherit;
     color: var(--color-ink-dark);
 }
 
-/* Latest/Archive: show titles use site background color */
+/* Latest/Archive (dark bg): titles in accent-2 */
 .recent-section .recent-title,
 .recent-section .recent-title a {
-    color: var(--color-bg);
+    color: var(--color-accent-2);
 }
 
 .recent-date {
@@ -147,30 +180,35 @@
     color: var(--color-surface);
 }
 
+/* Latest/Archive (dark bg): date text in accent-2 */
+.recent-section .recent-date {
+    color: var(--color-accent-2);
+}
+
 /* Recent section heading */
 .recent-heading.page-title {
     display: block;
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding-top: var(--spacing-6);
-    padding-right: var(--spacing-5);
-    padding-bottom: var(--spacing-3);
-    padding-left: var(--spacing-5);
-    background-color: var(--color-accent-2);
+    padding: var(--spacing-6) var(--spacing-5) var(--spacing-3) var(--spacing-5);
+    background-color: var(--color-bg);
     font-size: 28px;
+
     /* connect visually with the grid background */
 }
 
 /* Recent section container (wraps heading + grid) */
 .recent-section {
-    background-color: var(--color-accent-2);
+    background-color: var(--color-bg);
 }
 
 .upcoming-section .recent-posts {
     padding-right: var(--spacing-5);
+
     /* Match header padding for flush left/right alignment */
     padding-left: var(--spacing-5);
+
     /* Remove contrasting background so it blends with schedule section */
     background-color: transparent;
 }
@@ -178,24 +216,34 @@
 /* Upcoming carousel: one-row horizontal scroll */
 .upcoming-carousel {
     position: relative;
+
+    /* Arrows sit within the container; JS can override these vars */
+    overflow: visible;
+
+    /* Default to below a 16:9 image area plus a small gap */
+    --upcoming-nav-top: calc(56.25% + var(--spacing-2));
+    --upcoming-nav-translateY: 0;
 }
 
 .upcoming-track {
     display: grid;
     gap: var(--spacing-5);
-    /* No extra space below the cards */
-    padding-bottom: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    grid-auto-columns: calc((100% - (var(--spacing-5) * 4)) / 5);
+
+    /* Allow natural vertical growth; horizontal scroll only when needed */
+    padding-bottom: var(--spacing-5);
+    overflow: auto visible;
+
+    /* Exactly 4 visible columns; additional columns maintain same width */
+    grid-auto-columns: calc((100% - (var(--spacing-5) * 3)) / 4);
     grid-auto-flow: column;
-    /* Exactly 5 visible columns; additional columns maintain same width */
     grid-template-columns: none !important;
     overflow-anchor: none;
     -webkit-overflow-scrolling: touch;
+
     /* prevent auto realignment */
     scroll-behavior: smooth;
     scroll-snap-type: none;
+
     /* avoid scroll anchoring nudges */
 }
 
@@ -245,7 +293,7 @@
 .upcoming-nav {
     display: flex;
     position: absolute;
-    top: 50%;
+    top: var(--upcoming-nav-top, 50%);
     z-index: 1;
     justify-content: center;
     align-items: center;
@@ -256,19 +304,31 @@
     background: var(--color-ink-dark);
     color: var(--color-accent);
     cursor: pointer;
-    transform: translateY(-50%);
+    transform: translateY(var(--upcoming-nav-translateY, -50%));
 }
 
 .upcoming-nav[hidden] {
     display: none !important;
 }
 
+/* Keep arrows inside container edges for visibility */
 .upcoming-nav-left {
     left: var(--spacing-3);
 }
 
 .upcoming-nav-right {
     right: var(--spacing-3);
+}
+
+/* On narrow screens, keep arrows inside to ensure they remain visible */
+@media (max-width: 589px) {
+    .upcoming-nav-left {
+        left: var(--spacing-3);
+    }
+
+    .upcoming-nav-right {
+        right: var(--spacing-3);
+    }
 }
 
 @media (hover: hover) {
@@ -318,6 +378,40 @@
     background: transparent;
     border-color: var(--color-surface);
     color: var(--color-surface);
+}
+
+/* Latest/Archive (dark bg): tags use accent-2 */
+.recent-section .recent-post-content .post-tag {
+    border-color: var(--color-accent-2);
+    color: var(--color-accent-2);
+}
+
+/* Push tag row to the bottom of card content */
+.recent-post-content .post-tags {
+    /* Predictable gap between title and tags across all cards */
+    margin-top: var(--spacing-3);
+    width: 100%;
+    margin-bottom: 0;
+}
+
+/* Relax min-height on narrow mobile to avoid excessive blank space */
+@media (max-width: 589px) {
+    .recent-post {
+        min-height: auto;
+    }
+}
+
+/* Gradually relax min-height across medium breakpoints to avoid large voids */
+@media (max-width: 1200px) {
+    .recent-post {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .recent-post {
+        min-height: 280px;
+    }
 }
 
 /* Ensure upcoming tag pills keep site bg color in card content as well */

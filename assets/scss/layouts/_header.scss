@@ -1,6 +1,6 @@
 /* Header and Navigation */
 .site-header {
-    padding: 5px 0 0 0;
+    padding: 5px 0 0;
     border-bottom: none;
     background-color: var(--color-bg);
 
@@ -122,6 +122,7 @@
         position: absolute;
         top: var(--header-height);
         left: 0;
+
         /* reset desktop push */
         z-index: 1001;
         flex-direction: column !important;
@@ -133,7 +134,7 @@
         border-top: var(--border-accent-15);
         border-bottom: var(--border-accent-15);
         background: var(--color-ink-dark);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     }
 
     .main-nav.open {
