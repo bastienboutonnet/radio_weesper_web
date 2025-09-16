@@ -795,7 +795,8 @@ a {
   align-items: stretch;
   gap: 0;
   width: 100%;
-  max-width: 1800px;
+  /* Allow the grid to span the full viewport width on ultra-wide screens */
+  max-width: none;
   margin: 0 auto;
   overflow: visible;
   border-top: var(--border-ink-2);
