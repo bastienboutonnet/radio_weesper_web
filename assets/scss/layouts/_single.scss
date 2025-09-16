@@ -71,14 +71,14 @@
     margin: 0 0 var(--spacing-2) 0;
 }
 
-.single-hero .show-description > :first-child {
+.single-hero .show-description> :first-child {
     margin-top: 0;
 }
 
 .single-hero .now-playing-info {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2);
+    gap: var(--spacing-1);
     width: 100%;
     max-height: calc(80vh - 2 * var(--spacing-2));
     overflow: auto;
@@ -86,6 +86,13 @@
 
 .single-hero .upcoming-meta {
     margin-top: var(--spacing-2);
+}
+
+/* Make spacing between title and artists consistent with Now Playing */
+.single-hero .single-artists {
+    margin-top: var(--spacing-1);
+    font-weight: 500;
+    color: var(--color-accent-soft);
 }
 
 /* Single view: Date pill on black bg with blue text */

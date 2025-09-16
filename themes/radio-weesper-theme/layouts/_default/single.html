@@ -6,6 +6,9 @@
         <div class="now-playing-info">
           {{ $showName := or .Params.show_name .Title }}
           <h1 class="show-title">{{ $showName }}</h1>
+          {{ $artists := .Params.artists }}
+          {{ if not $artists }}{{ $artists = slice $showName }}{{ end }}
+          <p class="single-artists">with {{ partial "format-artists.html" (dict "artists" $artists) }}</p>
           <div class="upcoming-meta">
             <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan 2006" }}</span>
             {{ if or .Params.showtime .Params.showendtime }}

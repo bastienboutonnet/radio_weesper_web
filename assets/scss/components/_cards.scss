@@ -259,6 +259,11 @@
     color: var(--color-bg);
 }
 
+/* Archive page: artists line uses site bg color for contrast */
+.archive-page .recent-artists {
+    color: var(--color-bg);
+}
+
 /* Archive page: pills use site bg color on blue background */
 .archive-page .upcoming-pill-date,
 .archive-page .upcoming-pill-time {

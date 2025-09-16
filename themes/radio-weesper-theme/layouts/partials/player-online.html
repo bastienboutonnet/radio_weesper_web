@@ -6,6 +6,9 @@
   <aside class="now-playing">
     <div class="now-playing-info">
       <h3 class="show-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
+      {{ $artists := .Params.artists }}
+      {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+      <p class="now-playing-artists">with {{ partial "format-artists.html" (dict "artists" $artists) }}</p>
       {{ if and .Params.showtime .Params.showendtime }}
       <p class="show-time">
         {{ .Params.showtime }} - {{ .Params.showendtime }}
