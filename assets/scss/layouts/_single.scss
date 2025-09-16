@@ -39,7 +39,8 @@
     align-items: stretch;
     min-width: 0;
     background-color: var(--color-accent);
-    /* no vertical separator between info and image for singles */
+    /* vertical separator between info and image */
+    border-right: var(--border-ink-2);
     border-bottom: var(--border-ink-2);
     border-radius: 0;
     padding: var(--spacing-2) var(--spacing-4);
