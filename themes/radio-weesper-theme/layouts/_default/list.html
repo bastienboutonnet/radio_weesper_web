@@ -6,31 +6,41 @@
     <!-- <h1>{{ .Title }}</h1> -->
     <h2 class="recent-heading page-title">All Shows</h2>
     <div class="recent-posts">
-      {{ range (where .Site.RegularPages "Section" "post") }}
-      {{ $p := . }}
+  {{ range (where .Site.RegularPages "Section" "post") }}
+  {{ $p := . }}
+  {{ $hasResident := isset .Params "is_resident" }}
+  {{ $isResident := cond $hasResident .Params.is_resident true }}
+  {{ $artists := .Params.artists }}
+  {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+  {{ $artistsStr := partial "format-artists.html" (dict "artists" $artists) }}
+  {{ $showName := .Params.show_name }}
+  {{ $title := (or $showName .Title) }}
+  {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
       <article class="recent-post">
         {{ with .Params.image }}
         <img
           class="recent-post-img"
           src="{{ . | relURL }}"
-          alt="{{ with $p.Params.show_name }}{{ . }}{{ else }}{{ $p.Title }}{{ end }}"
+          alt="{{ $displayTitle }}"
         />
         {{ end }}
         <div class="recent-post-content">
           <div class="upcoming-meta">
             <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan" }}</span>
           </div>
-          <h3 class="recent-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
-          {{ $artists := .Params.artists }}
-          {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
-          <p class="recent-artists">with {{ partial "format-artists.html" (dict "artists" $artists) }}</p>
+          <h3 class="recent-title">{{ $displayTitle }}</h3>
+          {{ if $isResident }}
+            <p class="recent-artists">with {{ $artistsStr }}</p>
+          {{ else }}
+            <p class="recent-artists">Guestmix</p>
+          {{ end }}
           <div class="post-tags">
             {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
               >{{ . }}</span
             >{{ end }} {{ end }}
           </div>
         </div>
-        <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}"></a>
+  <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ $displayTitle }}"></a>
       </article>
       {{ end }}
     </div>

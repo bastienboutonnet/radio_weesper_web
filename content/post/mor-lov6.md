@@ -1,6 +1,7 @@
 ---
 title: "Mor.lov6"
-show_name: "Mor.lov6"
+show_name: ""
+is_resident: false
 date: 2025-09-30T20:00:00+02:00
 showtime: "20:00"
 showendtime: "21:00"

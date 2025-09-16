@@ -4,11 +4,20 @@
     <section class="single-hero">
       <aside class="single-hero-info">
         <div class="now-playing-info">
-          {{ $showName := or .Params.show_name .Title }}
-          <h1 class="show-title">{{ $showName }}</h1>
+          {{ $hasResident := isset .Params "is_resident" }}
+          {{ $isResident := cond $hasResident .Params.is_resident true }}
           {{ $artists := .Params.artists }}
-          {{ if not $artists }}{{ $artists = slice $showName }}{{ end }}
-          <p class="single-artists">with {{ partial "format-artists.html" (dict "artists" $artists) }}</p>
+          {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+          {{ $artistsStr := partial "format-artists.html" (dict "artists" $artists) }}
+          {{ $showName := .Params.show_name }}
+          {{ $title := (or $showName .Title) }}
+          {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
+          <h1 class="show-title">{{ $displayTitle }}</h1>
+          {{ if $isResident }}
+            <p class="single-artists">with {{ $artistsStr }}</p>
+          {{ else }}
+            <p class="single-artists">Guestmix</p>
+          {{ end }}
           <div class="upcoming-meta">
             <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan 2006" }}</span>
             {{ if or .Params.showtime .Params.showendtime }}

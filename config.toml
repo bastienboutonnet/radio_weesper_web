@@ -5,6 +5,8 @@ theme = "radio-weesper-theme"
 [params]
 radio_online = true
 # Additional custom parameters can be added here
+# Separator used between title and suffix (outlined sparkle by default)
+separator = "✧"
 
 [outputs]
 	section = ["HTML", "JSON"]

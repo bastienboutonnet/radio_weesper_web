@@ -11,10 +11,18 @@
           <span class="live-now-label">LIVE NOW</span>
           <span class="circle-indicator"></span>
           <div class="live-banner-marquee">
-            {{ with index (first 1 (where .Site.RegularPages "Section" "post"))
-            0 }}
+            {{ with index (first 1 (where .Site.RegularPages "Section" "post")) 0 }}
+            {{ $hasResident := isset .Params "is_resident" }}
+            {{ $isResident := cond $hasResident .Params.is_resident true }}
+            {{ $artists := .Params.artists }}
+            {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+            {{ $artistsStr := partial "format-artists.html" (dict "artists" $artists) }}
+            {{ $showName := .Params.show_name }}
+            {{ $title := (or $showName .Title) }}
+            {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
+            {{ $sep := (or .Site.Params.separator "—") }}
             <span class="marquee-span" id="live-marquee-title">
-              {{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}
+              {{ $displayTitle }} {{ $sep }} {{ if $isResident }}with {{ $artistsStr }}{{ else }}Guestmix{{ end }}
             </span>
             {{ else }}
             <span class="marquee-span-static">

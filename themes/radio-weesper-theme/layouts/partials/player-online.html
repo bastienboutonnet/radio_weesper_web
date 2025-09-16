@@ -5,10 +5,20 @@
   {{ with index (first 1 (where .Site.RegularPages "Section" "post")) 0 }}
   <aside class="now-playing">
     <div class="now-playing-info">
-      <h3 class="show-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
+      {{ $hasResident := isset .Params "is_resident" }}
+      {{ $isResident := cond $hasResident .Params.is_resident true }}
       {{ $artists := .Params.artists }}
       {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
-      <p class="now-playing-artists">with {{ partial "format-artists.html" (dict "artists" $artists) }}</p>
+      {{ $artistsStr := partial "format-artists.html" (dict "artists" $artists) }}
+      {{ $showName := .Params.show_name }}
+      {{ $title := (or $showName .Title) }}
+      {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
+      <h3 class="show-title">{{ $displayTitle }}</h3>
+      {{ if $isResident }}
+        <p class="now-playing-artists">with {{ $artistsStr }}</p>
+      {{ else }}
+        <p class="now-playing-artists">Guestmix</p>
+      {{ end }}
       {{ if and .Params.showtime .Params.showendtime }}
       <p class="show-time">
         {{ .Params.showtime }} - {{ .Params.showendtime }}
