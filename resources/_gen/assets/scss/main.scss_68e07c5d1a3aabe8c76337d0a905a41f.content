@@ -1222,6 +1222,13 @@ a {
   color: var(--color-surface);
 }
 
+.recent-artists {
+  margin: var(--spacing-1) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-surface);
+}
+
 /* Ensure title links render black as well */
 .recent-title a {
   font-family: inherit;
@@ -1232,6 +1239,10 @@ a {
 /* Latest/Archive (dark bg): titles in accent-2 */
 .recent-section .recent-title,
 .recent-section .recent-title a {
+  color: var(--color-accent-2);
+}
+
+.recent-section .recent-artists {
   color: var(--color-accent-2);
 }
 

@@ -32,6 +32,10 @@
               <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan" }}</span>
             </div>
             <h3 class="recent-title">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h3>
+            {{/* Artists line */}}
+            {{ $artists := .Params.artists }}
+            {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+            <p class="recent-artists">with {{ partial "format-artists.html" (dict "artists" $artists) }}</p>
             <div class="post-tags">
               {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
                 >{{ . }}</span
