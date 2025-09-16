@@ -182,6 +182,13 @@
     color: var(--color-surface);
 }
 
+.recent-artists {
+    margin: var(--spacing-1) 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-surface);
+}
+
 /* Ensure title links render black as well */
 .recent-title a {
     font-family: inherit;
@@ -192,6 +199,10 @@
 /* Latest/Archive (dark bg): titles in accent-2 */
 .recent-section .recent-title,
 .recent-section .recent-title a {
+    color: var(--color-accent-2);
+}
+
+.recent-section .recent-artists {
     color: var(--color-accent-2);
 }
 
@@ -245,6 +256,11 @@
 .archive-page .recent-title,
 .archive-page .recent-title a,
 .archive-page .recent-date {
+    color: var(--color-bg);
+}
+
+/* Archive page: artists line uses site bg color for contrast */
+.archive-page .recent-artists {
     color: var(--color-bg);
 }
 

@@ -40,7 +40,7 @@
           {{ end }}
           {{ range sort $showsForDay "Params.showtime" }}
             {{ $showtime := .Params.showtime }}
-            {{ $title := .Title }}
+            {{ $title := (or .Params.show_name .Title) }}
             {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
               <li class="schedule-show">
                 <span class="schedule-show-time">
@@ -51,7 +51,7 @@
                   {{- end -}}
                 </span>
                 <span class="schedule-show-title">
-                  <a href="{{ .RelPermalink }}" style="text-transform: uppercase; font-weight: 700; color: #181a1b;">{{ .Title }}</a>
+                  <a href="{{ .RelPermalink }}" style="text-transform: uppercase; font-weight: 700; color: #181a1b;">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
                 </span>
               </li>
             {{ end }}

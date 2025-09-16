@@ -185,6 +185,14 @@
     color: var(--color-text);
 }
 
+.single-artists {
+    margin: var(--spacing-1) 0 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-accent-soft);
+}
+
 .show-title {
     display: block;
     width: 100%;
@@ -195,6 +203,16 @@
     white-space: normal;
     word-break: normal;
     color: var(--color-accent-2);
+}
+
+.now-playing-artists {
+    margin: var(--spacing-1) 0 var(--spacing-2) 0;
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+    color: var(--color-accent-soft);
 }
 
 @container (max-width: 700px) {

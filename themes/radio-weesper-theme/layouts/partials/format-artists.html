@@ -1,0 +1,13 @@
+{{- $artists := .artists -}}
+{{- if not $artists -}}
+  {{- $artists = slice -}}
+{{- end -}}
+{{- $count := len $artists -}}
+{{- if eq $count 0 -}}{{- else if eq $count 1 -}}
+  {{- index $artists 0 -}}
+{{- else if eq $count 2 -}}
+  {{- index $artists 0 }} & {{ index $artists 1 -}}
+{{- else -}}
+  {{- $last := index $artists (sub $count 1) -}}
+  {{- delimit (first (sub $count 1) $artists) ", " }} & {{ $last -}}
+{{- end -}}

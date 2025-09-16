@@ -1,7 +1,7 @@
 {{- $.Scratch.Add "index" slice -}}
 {{- range .Site.RegularPages -}}
   {{- $.Scratch.Add "index" (dict
-      "title" .Title
+      "title" (or .Params.show_name .Title)
       "permalink" .Permalink
       "content" .Plain
   ) -}}

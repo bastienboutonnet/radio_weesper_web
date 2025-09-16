@@ -565,6 +565,14 @@ a {
   color: var(--color-text);
 }
 
+.single-artists {
+  margin: var(--spacing-1) 0 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-accent-soft);
+}
+
 .show-title {
   display: block;
   width: 100%;
@@ -575,6 +583,16 @@ a {
   white-space: normal;
   word-break: normal;
   color: var(--color-accent-2);
+}
+
+.now-playing-artists {
+  margin: var(--spacing-1) 0 var(--spacing-2) 0;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--color-accent-soft);
 }
 
 @container (max-width: 700px) {
@@ -684,7 +702,7 @@ a {
 .single-hero .now-playing-info {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--spacing-1);
   width: 100%;
   max-height: calc(80vh - 2 * var(--spacing-2));
   overflow: auto;
@@ -692,6 +710,13 @@ a {
 
 .single-hero .upcoming-meta {
   margin-top: var(--spacing-2);
+}
+
+/* Make spacing between title and artists consistent with Now Playing */
+.single-hero .single-artists {
+  margin-top: var(--spacing-1);
+  font-weight: 500;
+  color: var(--color-accent-soft);
 }
 
 /* Single view: Date pill on black bg with blue text */
@@ -1222,6 +1247,13 @@ a {
   color: var(--color-surface);
 }
 
+.recent-artists {
+  margin: var(--spacing-1) 0 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-surface);
+}
+
 /* Ensure title links render black as well */
 .recent-title a {
   font-family: inherit;
@@ -1232,6 +1264,10 @@ a {
 /* Latest/Archive (dark bg): titles in accent-2 */
 .recent-section .recent-title,
 .recent-section .recent-title a {
+  color: var(--color-accent-2);
+}
+
+.recent-section .recent-artists {
   color: var(--color-accent-2);
 }
 
@@ -1284,6 +1320,11 @@ a {
 .archive-page .recent-title,
 .archive-page .recent-title a,
 .archive-page .recent-date {
+  color: var(--color-bg);
+}
+
+/* Archive page: artists line uses site bg color for contrast */
+.archive-page .recent-artists {
   color: var(--color-bg);
 }
 

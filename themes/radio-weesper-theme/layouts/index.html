@@ -15,29 +15,42 @@
       {{ $now := now }}
       {{ $pastShows := where (where .Site.RegularPages "Section" "post") "Date" "<" $now }}
       {{ range first 6 $pastShows }}
+        {{ $p := . }}
         {{ $showtime := .Params.showtime }}
-        {{ $title := .Title }}
-        {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
+        {{ $hasResident := isset .Params "is_resident" }}
+        {{ $isResident := cond $hasResident .Params.is_resident true }}
+        {{ $artists := .Params.artists }}
+        {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+        {{ $artistsStr := partial "format-artists.html" (dict "artists" $artists) }}
+        {{ $showName := .Params.show_name }}
+        {{ $title := (or $showName .Title) }}
+        {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
+        {{ if or (and $showtime (ne $showtime "")) (and $displayTitle (ne $displayTitle "")) }}
         <article class="recent-post">
           {{ with .Params.image }}
           <img
             class="recent-post-img"
             src="{{ . | relURL }}"
-            alt="{{ $.Title }}"
+            alt="{{ $displayTitle }}"
           />
           {{ end }}
           <div class="recent-post-content">
             <div class="upcoming-meta">
               <span class="upcoming-pill upcoming-pill-date">{{ .Date.Format "Mon, 02 Jan" }}</span>
             </div>
-            <h3 class="recent-title">{{ .Title }}</h3>
+            <h3 class="recent-title">{{ $displayTitle }}</h3>
+            {{ if $isResident }}
+              <p class="recent-artists">with {{ $artistsStr }}</p>
+            {{ else }}
+              <p class="recent-artists">Guestmix</p>
+            {{ end }}
             <div class="post-tags">
               {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
                 >{{ . }}</span
               >{{ end }} {{ end }}
             </div>
           </div>
-          <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ .Title }}"></a>
+          <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ $displayTitle }}"></a>
         </article>
         {{ end }}
       {{ end }}
