@@ -1,0 +1,111 @@
+{{ define "title" }}Artists | {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<main class="archive-page container">
+  {{ partial "live-banner.html" . }}
+  <section class="recent-section container">
+    <h2 class="recent-heading page-title">All Artists</h2>
+  {{ $artists := where .Site.RegularPages "Section" "artist" }}
+  {{ $sorted := sort $artists (slice "Params.artist_name" "Title") }}
+
+    {{/* Full alphabet (A–Z) plus '#' bucket */}}
+    {{ $alphabet := slice "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "#" }}
+
+    {{ if hugo.IsDevelopment }}
+    <details style="margin: 8px 0 12px; padding: 8px 12px; background: rgba(0,0,0,.08);">
+      <summary>Artist A–Z debug (dev only)</summary>
+      <div style="font-family: monospace; font-size: 12px; line-height: 1.5;">
+        <div>Counts:
+          {{ range $alphabet }}
+            {{ $c := $.Scratch.Get (printf "letter-%s" .) }}
+            <span>[{{ . }}: {{ cond $c $c 0 }}]</span>
+          {{ end }}
+        </div>
+        <ul>
+        {{ range $sorted }}
+          {{ $nameForIndex := or .Params.artist_name (or .Title .File.BaseFileName) }}
+          {{ $raw := trim $nameForIndex " \t\r\n" }}
+          {{ $norm := replaceRE `^[^A-Za-z]+` "" $raw }}
+          {{ $slug := anchorize $raw }}
+          {{ $first := "#" }}
+          {{ if ne $norm "" }}{{ $first = upper (substr $norm 0 1) }}{{ end }}
+          {{ $firstRaw := "#" }}
+          {{ if ne $raw "" }}{{ $firstRaw = upper (substr $raw 0 1) }}{{ end }}
+          {{ $firstSlug := "#" }}
+          {{ if ne $slug "" }}{{ $firstSlug = upper (substr $slug 0 1) }}{{ end }}
+          <li>
+            name={{ printf "%q" $nameForIndex }} | raw={{ printf "%q" $raw }} | norm={{ printf "%q" $norm }} | slug={{ printf "%q" $slug }}
+            → first(norm)={{ $first }}, first(raw)={{ $firstRaw }}, first(slug)={{ $firstSlug }}
+          </li>
+        {{ end }}
+        </ul>
+      </div>
+    </details>
+    {{ end }}
+
+    {{/* Count artists per letter using Scratch to avoid scope issues */}}
+    {{ range $sorted }}
+      {{ $displayName := or .Params.artist_name (or .Title .File.BaseFileName) }}
+      {{ $raw := trim $displayName " \t\r\n" }}
+      {{ $slug := anchorize $raw }}
+      {{ $first := "#" }}
+      {{ if ne $slug "" }}
+        {{ $first = upper (substr $slug 0 1) }}
+      {{ end }}
+      {{ $.Scratch.Add (printf "letter-%s" $first) 1 }}
+    {{ end }}
+
+    <nav class="alpha-index" aria-label="Alphabetical index" style="margin-bottom: 1rem;">
+      <ul class="alpha-index-list" style="display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding-left: 0;">
+        {{ range $alphabet }}
+          {{ $count := $.Scratch.Get (printf "letter-%s" .) }}
+          {{ $has := and $count (gt $count 0) }}
+          <li>
+            {{ if $has }}
+              <a href="#{{ . }}" class="post-tag">{{ . }}</a>
+            {{ else }}
+              <span class="post-tag" aria-disabled="true" style="opacity: .35; pointer-events: none;">{{ . }}</span>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    {{ range $alphabet }}
+      {{ $count := $.Scratch.Get (printf "letter-%s" .) }}
+      {{ if and $count (gt $count 0) }}
+      <h3 id="{{ . }}" class="alpha-heading" style="margin: 1.25rem 0 .5rem;">{{ . }}</h3>
+      <div class="recent-posts">
+        {{ $letter := . }}
+        {{ range $sorted }}
+          {{ $displayName := or .Params.artist_name (or .Title .File.BaseFileName) }}
+          {{ $raw := trim $displayName " \t\r\n" }}
+          {{ $slug := anchorize $raw }}
+          {{ $first := "#" }}
+          {{ if ne $slug "" }}
+            {{ $first = upper (substr $slug 0 1) }}
+          {{ end }}
+          {{ if eq $first $letter }}
+            {{ $hasResident := isset .Params "is_resident" }}
+            {{ $isResident := cond $hasResident .Params.is_resident true }}
+            <article class="recent-post">
+              {{ with .Params.image }}
+              <img class="recent-post-img" src="{{ . | relURL }}" alt="{{ $displayName }}" />
+              {{ end }}
+              <div class="recent-post-content">
+                <h3 class="recent-title">{{ $displayName }}</h3>
+                {{ if $isResident }}
+                  <p class="recent-artists">Resident Artist</p>
+                {{ else }}
+                  <p class="recent-artists">Guest Artist</p>
+                {{ end }}
+              </div>
+              <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ $displayName }}"></a>
+            </article>
+          {{ end }}
+        {{ end }}
+      </div>
+      {{ end }}
+    {{ end }}
+  </section>
+</main>
+{{ end }}

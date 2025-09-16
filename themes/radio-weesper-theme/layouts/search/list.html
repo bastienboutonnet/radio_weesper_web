@@ -9,8 +9,13 @@
   const results = document.getElementById('results');
 
   async function init() {
-    const res = await fetch('/post/index.json');
-    const data = await res.json();
+    const [postRes, artistRes] = await Promise.all([
+      fetch('/post/index.json'),
+      fetch('/artist/index.json').catch(() => ({ ok: false, json: async () => [] }))
+    ]);
+    const posts = postRes.ok ? await postRes.json() : [];
+    const artists = artistRes.ok ? await artistRes.json() : [];
+    const data = [...posts, ...artists];
 
     const fuse = new Fuse(data, {
       keys: ['title', 'summary', 'content'],

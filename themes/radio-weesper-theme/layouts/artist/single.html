@@ -1,0 +1,30 @@
+{{ define "title" }}{{ or .Params.artist_name .Title }} | {{ .Site.Title }}{{ end }}
+{{ define "main" }}
+<main class="single-post container">
+  <article class="single-article">
+    <section class="single-hero">
+      <aside class="single-hero-info">
+        <div class="now-playing-info">
+          {{ $hasResident := isset .Params "is_resident" }}
+          {{ $isResident := cond $hasResident .Params.is_resident true }}
+          {{ $name := (or .Params.artist_name .Title) }}
+          <h1 class="show-title">{{ $name }}</h1>
+          {{ if $isResident }}
+            <p class="single-artists">Resident Artist</p>
+          {{ else }}
+            <p class="single-artists">Guest Artist</p>
+          {{ end }}
+
+          <div class="show-description">{{ .Content }}</div>
+        </div>
+      </aside>
+      {{ with .Params.image }}
+      <div class="single-hero-image">
+        <img src="{{ . | relURL }}" alt="{{ (or $.Params.artist_name $.Title) }}" />
+      </div>
+      {{ end }}
+    </section>
+
+  </article>
+</main>
+{{ end }}

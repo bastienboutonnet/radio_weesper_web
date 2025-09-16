@@ -1,8 +1,10 @@
 {{- $.Scratch.Add "index" slice -}}
-{{- range .Site.RegularPages -}}
+{{- range .Pages -}}
+  {{ $title := or .Params.artist_name (or .Params.show_name .Title) }}
   {{- $.Scratch.Add "index" (dict
-      "title" (or .Params.show_name .Title)
+      "title" $title
       "permalink" .Permalink
+      "summary" .Summary
       "content" .Plain
   ) -}}
 {{- end -}}
