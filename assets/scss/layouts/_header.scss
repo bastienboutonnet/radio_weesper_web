@@ -1,6 +1,6 @@
 /* Header and Navigation */
 .site-header {
-    padding: 5px 0 0 0;
+    padding: 5px 0 0;
     border-bottom: none;
     background-color: var(--color-bg);
 
@@ -122,6 +122,7 @@
         position: absolute;
         top: var(--header-height);
         left: 0;
+
         /* reset desktop push */
         z-index: 1001;
         flex-direction: column !important;

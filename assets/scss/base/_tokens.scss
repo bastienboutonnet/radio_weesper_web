@@ -8,11 +8,12 @@
   --color-muted: #b0b8c1;
   --color-accent: #ec5c28;
   --color-accent-2: #A4C2E0;
-  --color-live: #FF3366;
+  --color-live: #F36;
   --color-live-alt: #e48c1a;
 
   // Additional palette
   --color-accent-soft: #ACD6FB;
+
   /* rgb(172, 214, 251) */
   --color-muted-2: #999;
   --color-muted-3: #888;
@@ -29,10 +30,12 @@
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-2-5: 10px;
+
   /* half step used frequently */
   --spacing-3: 12px;
   --spacing-4: 16px;
   --spacing-4-5: 18px;
+
   /* half step used for some gaps */
   --spacing-5: 20px;
   --spacing-6: 24px;
@@ -43,8 +46,9 @@
   --spacing-big: 85px;
 
   // Fonts
-  --font-display: 'Space Grotesk', Helvetica, sans-serif;
-  --font-sans: 'Satoshi', 'Poppins', 'Montserrat', 'Segoe UI', Arial, Helvetica, sans-serif;
+  --font-display: 'Space Grotesk', helvetica, sans-serif;
+  --font-sans: 'Satoshi', 'Poppins', 'Montserrat', 'Segoe UI', arial, helvetica, sans-serif;
+  --font-serif: 'Spectral', georgia, 'Times New Roman', serif;
 
   // Borders & shadows
   --border-ink-2: 2px solid var(--color-ink-dark);
@@ -57,6 +61,11 @@
   --now-playing-width-desktop: 30%;
   --header-height: 58px;
   --header-height-mobile: 56px;
+
+  /* Card layout */
+
+  /* Slightly reduced after feedback (was 360px) */
+  --card-min-height: 320px;
 }
 
 /* Token legend

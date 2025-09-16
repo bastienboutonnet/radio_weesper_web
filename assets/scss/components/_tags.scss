@@ -11,6 +11,7 @@
     padding: 0;
     line-height: 1.2;
     text-transform: lowercase;
+
     /* Avoid awkward leftover space on wrap rows */
     row-gap: calc(var(--spacing-1) + 2px);
 }

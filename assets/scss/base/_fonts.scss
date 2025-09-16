@@ -1,14 +1,17 @@
 /* Web fonts (part of SCSS pipeline) */
+
 /* External families (optional): */
 @import 'https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap';
-@import 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;500&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap';
 
 /* Self-hosted variable font: Satoshi */
 @font-face {
-    font-family: 'Satoshi';
+    font-family: Satoshi;
     font-weight: 300 900;
     font-style: normal;
     font-display: swap;
+
     /* Use path relative to /css/style.css so it works under subpaths */
     src: url('../fonts/Satoshi-Variable.woff2') format('woff2'),
         url('../fonts/Satoshi-Variable.woff') format('woff');
@@ -20,6 +23,7 @@
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+
     /* Use path relative to /css/style.css so it works under subpaths */
     src: url('../fonts/Phonk-Regular.woff2') format('woff2'),
         url('../fonts/Phonk-Regular.woff') format('woff');
