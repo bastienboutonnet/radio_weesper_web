@@ -11,7 +11,16 @@
           <span class="live-now-label">LIVE NOW</span>
           <span class="circle-indicator"></span>
           <div class="live-banner-marquee">
-            {{ with index (first 1 (where .Site.RegularPages "Section" "post")) 0 }}
+            {{ $now := now }}
+            {{ $upcoming := sort (where (where .Site.RegularPages "Section" "post") "Date" ">=" $now) "Date" "asc" }}
+            {{ $next := cond (gt (len $upcoming) 0) (index $upcoming 0) nil }}
+            {{ if not $next }}
+              {{ $past := sort (where (where .Site.RegularPages "Section" "post") "Date" "<" $now) "Date" "desc" }}
+              {{ if gt (len $past) 0 }}
+                {{ $next = (index $past 0) }}
+              {{ end }}
+            {{ end }}
+            {{ with $next }}
             {{ $hasResident := isset .Params "is_resident" }}
             {{ $isResident := cond $hasResident .Params.is_resident true }}
             {{ $artists := .Params.artists }}
