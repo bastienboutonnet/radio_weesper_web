@@ -91,6 +91,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  /* Smooth scroll for anchor links (used by artist alpha index) */
+  scroll-behavior: smooth;
 }
 
 body {

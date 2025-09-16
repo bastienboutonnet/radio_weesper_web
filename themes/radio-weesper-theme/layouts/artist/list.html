@@ -10,8 +10,6 @@
     {{/* Full alphabet (A–Z) plus '#' bucket */}}
     {{ $alphabet := slice "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z" "#" }}
 
-    
-
     {{/* Count artists per letter using Scratch to avoid scope issues */}}
     {{ range $sorted }}
       {{ $displayName := or .Params.artist_name (or .Title .File.BaseFileName) }}
