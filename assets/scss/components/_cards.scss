@@ -59,6 +59,8 @@
     border-radius: 0;
     background: none;
     box-shadow: none;
+    position: relative;
+    /* enable full-card link overlay */
 }
 
 .recent-post img,
@@ -87,6 +89,27 @@
 
     // border-bottom-left-radius: 0;
     // border-bottom-right-radius: 0;
+}
+
+/* Full-card link overlay */
+.card-link {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    /* above inner content so clicks hit the link */
+}
+
+/* Ensure inner content sits above the overlay for hover/focus styling if needed */
+.recent-post img,
+.recent-post-content {
+    position: static;
+    z-index: auto;
+}
+
+/* Accessible focus ring when tabbing to the card */
+.card-link:focus-visible {
+    outline: 2px solid var(--color-bg);
+    outline-offset: -2px;
 }
 
 /* Upcoming pills (date/time above title) */
@@ -203,6 +226,47 @@
     background-color: var(--color-bg);
 }
 
+/* Archive page: highlight the shows list container with accent-2 */
+.archive-page .recent-posts {
+    background-color: var(--color-accent-2);
+}
+
+/* Archive page: apply accent-2 background to the whole section and title */
+.archive-page .recent-section {
+    background-color: var(--color-accent-2);
+}
+
+.archive-page .recent-heading.page-title {
+    background-color: var(--color-accent-2);
+    color: var(--color-accent);
+}
+
+/* Archive page: text and links on blue should use site bg color */
+.archive-page .recent-title,
+.archive-page .recent-title a,
+.archive-page .recent-date {
+    color: var(--color-bg);
+}
+
+/* Archive page: pills use site bg color on blue background */
+.archive-page .upcoming-pill-date,
+.archive-page .upcoming-pill-time {
+    background: transparent;
+    border: 1.5px solid var(--color-bg);
+    color: var(--color-bg);
+}
+
+/* Archive page: tags use site bg color on blue background */
+.archive-page .recent-post-content .post-tag {
+    border-color: var(--color-bg);
+    color: var(--color-bg);
+}
+
+/* Archive page: remove dark chip-bar behind tags */
+.archive-page .recent-post-content .post-tags {
+    background: transparent;
+}
+
 .upcoming-section .recent-posts {
     padding-right: var(--spacing-5);
 
@@ -294,7 +358,8 @@
     display: flex;
     position: absolute;
     top: var(--upcoming-nav-top, 50%);
-    z-index: 1;
+    z-index: 50;
+    /* above .card-link (z-index:5) to keep buttons clickable */
     justify-content: center;
     align-items: center;
     width: 36px;
@@ -416,6 +481,12 @@
 
 /* Ensure upcoming tag pills keep site bg color in card content as well */
 .upcoming-section .recent-post-content .post-tag {
+    border-color: var(--color-bg);
+    color: var(--color-bg);
+}
+
+/* Archive override (placed after recent-section rule): force tags to use site bg color */
+.archive-page .recent-section .recent-post-content .post-tag {
     border-color: var(--color-bg);
     color: var(--color-bg);
 }

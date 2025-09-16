@@ -1,0 +1,143 @@
+/* Single post layout inspired by player section */
+.single-article {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.single-hero {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
+    /* separator drawn via borders */
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 80vh;
+    /* mirror player section height */
+}
+
+.single-hero-image {
+    flex: 1 1 70%;
+    min-width: 0;
+    background-color: var(--color-surface);
+    border-bottom: var(--border-ink-2);
+}
+
+.single-hero-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.single-hero-info {
+    flex: 0 0 var(--now-playing-width-desktop);
+    display: flex;
+    align-items: stretch;
+    min-width: 0;
+    background-color: var(--color-accent);
+    /* no vertical separator between info and image for singles */
+    border-bottom: var(--border-ink-2);
+    border-radius: 0;
+    padding: var(--spacing-2) var(--spacing-4);
+    font-family: var(--font-display);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    container-type: inline-size;
+}
+
+.single-hero .show-title {
+    color: var(--color-accent-2);
+}
+
+.single-hero .show-time {
+    color: var(--color-accent-2);
+}
+
+.single-hero .show-description {
+    margin-top: var(--spacing-3);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.4;
+    text-align: left;
+    color: var(--color-text);
+}
+
+.single-hero .show-description p {
+    margin: 0 0 var(--spacing-2) 0;
+}
+
+.single-hero .show-description > :first-child {
+    margin-top: 0;
+}
+
+.single-hero .now-playing-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    width: 100%;
+    max-height: calc(80vh - 2 * var(--spacing-2));
+    overflow: auto;
+}
+
+.single-hero .upcoming-meta {
+    margin-top: var(--spacing-2);
+}
+
+/* Single view: Date pill on black bg with blue text */
+.single-hero .upcoming-meta .upcoming-pill-date {
+    background: var(--color-bg);
+    border: none;
+    color: var(--color-accent-2);
+}
+
+/* Keep time pill in blue-accent style as-is */
+.single-hero .upcoming-meta .upcoming-pill-time {
+    border-color: var(--color-bg);
+    color: var(--color-bg);
+}
+
+.single-hero .post-tags {
+    width: 70%;
+}
+
+@container (max-width: 700px) {
+    .single-hero .post-tags {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .single-hero {
+        flex-direction: column;
+        border-bottom: none;
+        /* handled by stacked elements */
+        height: auto;
+    }
+
+    .single-hero-image img {
+        border-bottom: var(--border-ink-2);
+    }
+
+    .single-hero-info {
+        flex: 1 1 auto;
+        width: 100%;
+        border-right: none;
+        border-bottom: var(--border-ink-2);
+        padding: var(--spacing-3) var(--spacing-3) var(--spacing-5) var(--spacing-3);
+    }
+
+    .single-hero .post-tags {
+        width: 100%;
+    }
+}
+
+.single-post .post-content {
+    max-width: 85ch;
+    padding: var(--spacing-4) var(--spacing-2);
+    margin: 0 auto;
+}

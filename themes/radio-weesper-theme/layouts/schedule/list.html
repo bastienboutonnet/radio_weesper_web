@@ -34,15 +34,14 @@
               <span class="upcoming-pill upcoming-pill-time">{{ $stime }}</span>
               {{ end }}
             </div>
-            <h3 class="recent-title">
-              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            </h3>
+            <h3 class="recent-title">{{ .Title }}</h3>
             <div class="post-tags">
               {{ with .Params.tags }} {{ range first 4 . }}<span class="post-tag"
                 >{{ . }}</span
               >{{ end }} {{ end }}
             </div>
           </div>
+          <a class="card-link" href="{{ .RelPermalink }}" aria-label="Open {{ .Title }}"></a>
         </article>
         {{ end }}
       {{ end }}
