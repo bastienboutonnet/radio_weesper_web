@@ -205,6 +205,15 @@
     color: var(--color-accent-2);
 }
 
+/* Keep linked titles blue, not the default orange link color */
+.show-title a {
+    font-family: inherit;
+    font-weight: inherit;
+    color: var(--color-accent-2);
+    text-decoration: none;
+}
+
+
 .now-playing-artists {
     margin: var(--spacing-1) 0 var(--spacing-2) 0;
     width: 100%;

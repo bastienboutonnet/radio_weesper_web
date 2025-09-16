@@ -39,7 +39,8 @@
     align-items: stretch;
     min-width: 0;
     background-color: var(--color-accent);
-    /* no vertical separator between info and image for singles */
+    /* vertical separator between info and image */
+    border-right: var(--border-ink-2);
     border-bottom: var(--border-ink-2);
     border-radius: 0;
     padding: var(--spacing-2) var(--spacing-4);
@@ -93,6 +94,13 @@
     margin-top: var(--spacing-1);
     font-weight: 500;
     color: var(--color-accent-soft);
+}
+
+/* Ensure linked artist names match artists text styling */
+.single-hero .single-artists a {
+    color: var(--color-accent-soft);
+    font-weight: inherit;
+    text-decoration: none;
 }
 
 /* Single view: Date pill on black bg with blue text */

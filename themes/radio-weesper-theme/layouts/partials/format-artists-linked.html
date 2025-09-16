@@ -1,0 +1,36 @@
+{{/*
+  Render artist names. If an artist page exists (by matching `urlize` with artist section slugs), link to it; otherwise render plain text.
+  Input: dict { artists: [], Site: .Site }
+*/}}
+{{- $artists := .artists -}}
+{{- if not $artists -}}
+  {{- $artists = slice -}}
+{{- end -}}
+{{- $count := len $artists -}}
+{{- $site := .Site -}}
+{{- /* Build an array of rendered names (either links or plain text) */ -}}
+{{- $rendered := slice -}}
+{{- range $artists -}}
+  {{- $name := . -}}
+  {{- $slug := $name | urlize -}}
+  {{- $artistPages := where $site.RegularPages "Section" "artist" -}}
+  {{- $page := first 1 (where $artistPages "File.BaseFileName" $slug) -}}
+  {{- if gt (len $page) 0 -}}
+    {{- with index $page 0 -}}
+      {{- $rendered = $rendered | append ((printf "<a href=\"%s\">%s</a>" .RelPermalink $name) | safeHTML) -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $rendered = $rendered | append $name -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if eq $count 0 -}}
+{{- else if eq $count 1 -}}
+  {{- (index $rendered 0) | safeHTML -}}
+{{- else if eq $count 2 -}}
+  {{- (print (index $rendered 0) " & " (index $rendered 1)) | safeHTML -}}
+{{- else -}}
+  {{- $last := index $rendered (sub $count 1) -}}
+  {{- $first := first (sub $count 1) $rendered -}}
+  {{- (print (delimit $first ", ") " & " $last) | safeHTML -}}
+{{- end -}}
