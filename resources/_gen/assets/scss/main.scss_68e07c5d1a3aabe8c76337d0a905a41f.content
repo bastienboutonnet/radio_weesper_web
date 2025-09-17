@@ -846,17 +846,13 @@ a {
   border-radius: 0;
   background: none;
   box-shadow: none;
-  grid-template-columns: repeat(4, 1fr);
+  /* Match the logic that shows at most 3 days */
+  grid-template-columns: repeat(3, 1fr);
   /* No bottom padding here; columns provide their own so borders reach bottom */
+  /* Stack to a single column on 1200px and below */
 }
 
 @media (max-width: 1200px) {
-  .schedule-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 700px) {
   .schedule-grid {
     grid-template-columns: 1fr;
   }
@@ -977,7 +973,8 @@ a {
 }
 
 /* When days stack on mobile, use horizontal separators between them */
-@media (max-width: 700px) {
+/* When days stack (<=1200px), use horizontal separators between them */
+@media (max-width: 1200px) {
   .schedule-day-column {
     /* Remove desktop-style vertical separator */
     border-right: none;

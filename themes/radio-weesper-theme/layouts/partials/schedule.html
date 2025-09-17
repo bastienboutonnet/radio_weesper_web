@@ -16,12 +16,17 @@
       {{ $days = $days | append $day }}
     {{ end }}
   {{ end }}
+  {{/* Limit to at most 3 distinct future days */}}
+  {{ $daysToShow := $days }}
+  {{ if gt (len $days) 3 }}
+    {{ $daysToShow = last 3 $days }}
+  {{ end }}
   <div class="schedule-grid-wrap">
   <div class="schedule-grid">
-    {{ $daysCount := len $days }}
-    {{ range $i, $v := $days }}
+    {{ $daysCount := len $daysToShow }}
+    {{ range $i, $v := $daysToShow }}
       {{ $revIndex := sub (sub $daysCount $i) 1 }}
-      {{ $day := index $days $revIndex }}
+      {{ $day := index $daysToShow $revIndex }}
       {{/* Split $day into parts: day name, digits, month */}}
       {{ $parts := split $day ", " }}
       {{ $dayName := index $parts 0 }}
