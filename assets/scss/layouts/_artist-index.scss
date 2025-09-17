@@ -7,10 +7,13 @@
     z-index: 1002;
     left: 0;
     width: 100%;
-    padding: 0 var(--spacing-5) 0 var(--spacing-4);
+    box-sizing: border-box;
+    /* balanced horizontal padding to avoid mobile truncation */
+    padding: 0 var(--spacing-4);
     background: var(--color-accent-2);
     /* Visual separation when content scrolls underneath */
     border-bottom: 1px solid var(--color-accent-soft);
+    margin-bottom: var(--spacing-3);
 
     /* Expose an approximate height var for anchor offset consumers */
     --alpha-index-height: 3.5rem;
@@ -26,8 +29,8 @@
 }
 
 .alpha-heading {
-    margin: var(--spacing-3) 0 var(--spacing-2);
-    padding: 0 var(--spacing-5);
+    margin: var(--spacing-4) 0 var(--spacing-2);
+    padding: 0 var(--spacing-4);
     font-family: var(--font-display);
     color: var(--color-bg);
     border-top: 2px solid var(--color-ink-dark);
@@ -71,8 +74,14 @@ main.archive-page.container,
     text-decoration: none;
 }
 
-/* Ensure letter size wins over component tag styles in recent-section */
+/* Ensure letter size wins over component tag styles in recent-section.
+   Use fluid size so it scales down on narrow screens (mobile) */
 .recent-section .alpha-index .post-tag {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
     line-height: 1.1;
+}
+
+/* Spacer used by JS when bar is fixed (template script sets height dynamically) */
+#alpha-spacer {
+    height: 0;
 }

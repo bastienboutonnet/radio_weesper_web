@@ -23,8 +23,8 @@
     {{ end }}
 
   <div id="alpha-sentinel" aria-hidden="true"></div>
-  <nav class="alpha-index" aria-label="Alphabetical index" style="left: 0; right: 0; width: 100%; background: var(--color-accent-2); border-bottom: 1px solid var(--color-accent-soft); margin-bottom: 1rem;">
-      <ul class="alpha-index-list" style="display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding-left: 0;">
+  <nav class="alpha-index" aria-label="Alphabetical index">
+      <ul class="alpha-index-list">
         {{ range $alphabet }}
           {{ $count := $.Scratch.Get (printf "letter-%s" .) }}
           {{ $has := and $count (gt $count 0) }}
@@ -32,19 +32,19 @@
             {{ if $has }}
               <a href="#{{ . }}" class="post-tag">{{ . }}</a>
             {{ else }}
-              <span class="post-tag" aria-disabled="true" style="opacity: .35; pointer-events: none;">{{ . }}</span>
+              <span class="post-tag" aria-disabled="true">{{ . }}</span>
             {{ end }}
           </li>
         {{ end }}
       </ul>
   </nav>
 
-  <div id="alpha-spacer" style="height: 0;"></div>
+  <div id="alpha-spacer"></div>
 
   {{ range $alphabet }}
       {{ $count := $.Scratch.Get (printf "letter-%s" .) }}
       {{ if and $count (gt $count 0) }}
-  <h3 id="{{ . }}" class="alpha-heading" style="margin: 1.25rem 0 .5rem; scroll-margin-top: 3.75rem;">{{ . }}</h3>
+  <h3 id="{{ . }}" class="alpha-heading">{{ . }}</h3>
       <div class="recent-posts">
         {{ $letter := . }}
         {{ range $sorted }}
