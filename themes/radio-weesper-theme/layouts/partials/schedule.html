@@ -9,24 +9,20 @@
   {{ $end := $now.AddDate 0 0 21 }}
   {{ $shows := where (where .Site.Pages "Section" "post") "Date" ">=" $now }}
   {{ $shows := where $shows "Date" "<" $end }}
+  {{/* Sort by date ascending so we can take the next three days */}}
+  {{ $showsSorted := sort $shows "Date" }}
   {{ $days := slice }}
-  {{ range $shows }}
+  {{ range $showsSorted }}
     {{ $day := .Date.Format "Mon, 02 Jan" }}
     {{ if not (in $days $day) }}
       {{ $days = $days | append $day }}
     {{ end }}
   {{ end }}
-  {{/* Limit to at most 3 distinct future days */}}
-  {{ $daysToShow := $days }}
-  {{ if gt (len $days) 3 }}
-    {{ $daysToShow = last 3 $days }}
-  {{ end }}
+  {{/* Limit to the next 3 distinct days */}}
+  {{ $daysToShow := first 3 $days }}
   <div class="schedule-grid-wrap">
   <div class="schedule-grid">
-    {{ $daysCount := len $daysToShow }}
-    {{ range $i, $v := $daysToShow }}
-      {{ $revIndex := sub (sub $daysCount $i) 1 }}
-      {{ $day := index $daysToShow $revIndex }}
+    {{ range $i, $day := $daysToShow }}
       {{/* Split $day into parts: day name, digits, month */}}
       {{ $parts := split $day ", " }}
       {{ $dayName := index $parts 0 }}
@@ -38,15 +34,22 @@
         <div class="schedule-day-pill">{{ $dayName }}, {{ $dayDigits }} {{ $month }}</div>
         <ul class="schedule-shows">
           {{ $showsForDay := slice }}
-          {{ range $shows }}
+          {{ range $showsSorted }}
             {{ if eq (.Date.Format "Mon, 02 Jan") $day }}
               {{ $showsForDay = $showsForDay | append . }}
             {{ end }}
           {{ end }}
           {{ range sort $showsForDay "Params.showtime" }}
             {{ $showtime := .Params.showtime }}
-            {{ $title := (or .Params.show_name .Title) }}
-            {{ if or (and $showtime (ne $showtime "")) (and $title (ne $title "")) }}
+            {{ $hasResident := isset .Params "is_resident" }}
+            {{ $isResident := cond $hasResident .Params.is_resident true }}
+            {{ $artists := .Params.artists }}
+            {{ if not $artists }}{{ $artists = slice (or .Params.show_name .Title) }}{{ end }}
+            {{ $artistsStr := partial "format-artists.html" (dict "artists" $artists) }}
+            {{ $showName := .Params.show_name }}
+            {{ $title := (or $showName .Title) }}
+            {{ $displayTitle := cond (and (not $isResident) (not $showName)) $artistsStr $title }}
+            {{ if or (and $showtime (ne $showtime "")) (and $displayTitle (ne $displayTitle "")) }}
               <li class="schedule-show">
                 <span class="schedule-show-time">
                   {{- if .Params.showendtime -}}
@@ -56,7 +59,12 @@
                   {{- end -}}
                 </span>
                 <span class="schedule-show-title">
-                  <a href="{{ .RelPermalink }}" style="text-transform: uppercase; font-weight: 700; color: #181a1b;">{{ with .Params.show_name }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+                  <a href="{{ .RelPermalink }}">{{ $displayTitle | title }}</a>
+                  {{ if $isResident }}
+                    <span class="schedule-show-meta">with {{ $artistsStr }}</span>
+                  {{ else }}
+                    <span class="schedule-show-meta">Guestmix</span>
+                  {{ end }}
                 </span>
               </li>
             {{ end }}

@@ -158,6 +158,30 @@
     align-items: center;
     white-space: pre-line;
     color: var(--color-bg);
+    gap: var(--spacing-2);
+}
+
+.schedule-show-title a {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: capitalize;
+    color: var(--color-bg);
+}
+
+.schedule-show-title a:visited {
+    color: var(--color-bg);
+}
+
+.schedule-show-title a:hover {
+    color: var(--color-ink-dark);
+}
+
+.schedule-show-meta {
+    margin-left: var(--spacing-2);
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-bg);
 }
 
 /* Upcoming Shows header: mirror Latest Shows heading scale/spacing */
@@ -190,7 +214,6 @@
     }
 }
 
-/* When days stack on mobile, use horizontal separators between them */
 /* When days stack (<=1200px), use horizontal separators between them */
 @media (max-width: 1200px) {
     .schedule-day-column {
