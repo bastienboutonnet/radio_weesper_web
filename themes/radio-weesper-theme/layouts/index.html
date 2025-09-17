@@ -1,8 +1,7 @@
 {{ define "title" }}{{ .Site.Title }}{{ end }} {{ define "main" }}
 <main class="homepage">
   <script src="/js/live-marquee.js"></script>
-  <!-- Live banner -->
-  {{ partial "live-banner.html" . }}
+
 
   <!-- Player + Now Playing or Schedule -->
   {{ if .Site.Params.radio_online }} {{ partial "player-online.html" . }} {{

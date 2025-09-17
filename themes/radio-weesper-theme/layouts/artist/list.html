@@ -1,7 +1,6 @@
 {{ define "title" }}Artists | {{ .Site.Title }}{{ end }}
 {{ define "main" }}
 <main class="archive-page container">
-  {{ partial "live-banner.html" . }}
   <section class="recent-section container">
     <h2 class="recent-heading page-title">All Artists</h2>
   {{ $artists := where .Site.RegularPages "Section" "artist" }}
