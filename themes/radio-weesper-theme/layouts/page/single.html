@@ -1,0 +1,17 @@
+{{ define "main" }}
+<main class="single-post container">
+  <article class="single-article">
+    <section class="single-hero">
+      <aside class="single-hero-info">
+        <div class="now-playing-info">
+          <h1 class="show-title">{{ .Title }}</h1>
+          <div class="show-description">{{ .Content }}</div>
+        </div>
+      </aside>
+      <div class="single-hero-image">
+        <img src="/images/RadioWeesper_logo_circle.png" alt="Radio Weesper Logo" />
+      </div>
+    </section>
+  </article>
+</main>
+{{ end }}
