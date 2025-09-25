@@ -6,7 +6,10 @@
   *, *::before, *::after {
     animation: none !important;
     transition: none !important;
-    filter: none !important;
+  }
+  .centered-logo {
+    animation: none !important;
+    /* Keep the filter for static glow */
   }
   .centered-date {
     background: none !important;
