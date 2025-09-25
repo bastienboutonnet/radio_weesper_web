@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Funk on Radio Weesper</title>
-    <link>http://localhost:60000/tags/funk/</link>
+    <link>https://rw.bastienboutonnet.nl:1313/tags/funk/</link>
     <description>Recent content in Funk on Radio Weesper</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 03 Sep 2025 19:00:00 +0200</lastBuildDate>
-    <atom:link href="http://localhost:60000/tags/funk/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://rw.bastienboutonnet.nl:1313/tags/funk/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mor.lov3</title>
-      <link>http://localhost:60000/post/mor-lov3/</link>
+      <link>https://rw.bastienboutonnet.nl:1313/post/mor-lov3/</link>
       <pubDate>Wed, 03 Sep 2025 19:00:00 +0200</pubDate>
-      <guid>http://localhost:60000/post/mor-lov3/</guid>
+      <guid>https://rw.bastienboutonnet.nl:1313/post/mor-lov3/</guid>
       <description>&lt;p&gt;Welcome to the debut episode of &lt;strong&gt;Mor.lov&lt;/strong&gt; on Radio Weesper. In this show we explore experimental sounds, relaxed beats and the stories behind them. Tune in every Wednesday at 19:00 for new music and inspiration.&lt;/p&gt;</description>
     </item>
   </channel>
