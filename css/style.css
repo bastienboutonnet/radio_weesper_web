@@ -2,15 +2,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@100;400;500&display=swap');
 
 @media (max-width: 700px) {
+
   /* Disable all CSS animations and transitions on mobile */
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation: none !important;
     transition: none !important;
   }
+
   .centered-logo {
     animation: none !important;
     /* Keep the filter for static glow */
   }
+
   .centered-date {
     background: none !important;
     color: #afdcff !important;
@@ -27,7 +32,8 @@
 /* Starfield background */
 .starfield {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
@@ -36,6 +42,7 @@
   background: #000;
   /* no background, just stars */
 }
+
 .star {
   position: absolute;
   width: 1.2px;
@@ -48,12 +55,16 @@
 }
 
 @keyframes twinkle {
-  0%, 90%, 100% {
+
+  0%,
+  90%,
+  100% {
     opacity: 0.6;
     width: 1.2px;
     height: 1.2px;
     box-shadow: 0 0 2px 0.5px #afdcff44;
   }
+
   50% {
     opacity: 1;
     width: 3px;
@@ -63,12 +74,15 @@
 }
 
 @keyframes twinkle {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
     width: 1.2px;
     height: 1.2px;
     box-shadow: 0 0 2px 0.5px #afdcff44;
   }
+
   50% {
     opacity: 1;
     width: 1.8px;
@@ -77,7 +91,8 @@
   }
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -91,9 +106,11 @@ html, body {
   height: 48px;
   color: #afdcff;
 }
+
 .centered-instagram-icon {
   color: #afdcff;
 }
+
 /* Centered Instagram icon styling */
 .centered-instagram {
   display: flex;
@@ -118,24 +135,24 @@ html, body {
 
 canvas.starfield-bg {
   position: fixed !important;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100vw !important;
   height: 100vh !important;
   pointer-events: none;
   z-index: 0 !important;
   display: block;
 }
+
 .centered-logo {
   width: 300px;
   max-width: 90vw;
   margin-bottom: 5.5rem;
   filter:
-    drop-shadow(0 0 0px #afdcff88)
-    drop-shadow(0 0 32px #afdcff66)
-    drop-shadow(0 0 96px #afdcff44)
-    drop-shadow(0 0 192px #afdcff22);
+    drop-shadow(0 0 0px #afdcff88) drop-shadow(0 0 32px #afdcff66) drop-shadow(0 0 96px #afdcff44) drop-shadow(0 0 192px #afdcff22);
   animation: pulse-glow 3s infinite;
 }
+
 .centered-date {
   font-size: 2.7rem;
   font-family: 'Syncopate', 'Montserrat', 'Inter', 'Segoe UI', Arial, sans-serif;
@@ -157,6 +174,7 @@ canvas.starfield-bg {
   0% {
     background-position: 200% center;
   }
+
   100% {
     background-position: 0% center;
   }
@@ -166,23 +184,16 @@ canvas.starfield-bg {
 @keyframes pulse-glow {
   0% {
     filter:
-      drop-shadow(0 0 0px #afdcff88)
-      drop-shadow(0 0 32px #afdcff66)
-      drop-shadow(0 0 96px #afdcff44)
-      drop-shadow(0 0 192px #afdcff22);
+      drop-shadow(0 0 0px #afdcff88) drop-shadow(0 0 32px #afdcff66) drop-shadow(0 0 96px #afdcff44) drop-shadow(0 0 192px #afdcff22);
   }
+
   50% {
     filter:
-      drop-shadow(0 0 0px #afdcffcc)
-      drop-shadow(0 0 64px #afdcff99)
-      drop-shadow(0 0 192px #afdcff44)
-      drop-shadow(0 0 384px #afdcff22);
+      drop-shadow(0 0 0px #afdcffcc) drop-shadow(0 0 64px #afdcff99) drop-shadow(0 0 192px #afdcff44) drop-shadow(0 0 384px #afdcff22);
   }
+
   100% {
     filter:
-      drop-shadow(0 0 0px #afdcff88)
-      drop-shadow(0 0 32px #afdcff66)
-      drop-shadow(0 0 96px #afdcff44)
-      drop-shadow(0 0 192px #afdcff22);
+      drop-shadow(0 0 0px #afdcff88) drop-shadow(0 0 32px #afdcff66) drop-shadow(0 0 96px #afdcff44) drop-shadow(0 0 192px #afdcff22);
   }
 }
